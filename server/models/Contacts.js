@@ -8,7 +8,8 @@ const contactSchema = new Schema({
     industry: {type: String, required: true},
     email: {type: String, required: true},
     phoneNumber: {type: Number, required: true},
-    country: {type: String, required: true}
+    country: {type: String, required: true},
+    userRef: {type: Schema.Types.ObjectId, ref: user}
 });
 
 const ContactModel = mongoose.model('Contact', contactSchema);
