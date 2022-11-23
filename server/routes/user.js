@@ -19,19 +19,19 @@ router.get('/', async (req, res) => {
     }
 })
 
-// router.post('/', async (req, res) => {
-//     const users = await User.create(req.body);
-//     try {
-//         res.status(200).json({
-//             status: "Success",
-//             users
-//         })
-//     } catch(e) {
-//         res.status(400).json({
-//             Status: "Failed to post user",
-//             message: e.message
-//         })
-//     }
-// })
+router.post('/', async (req, res) => {
+    const users = await User.create(req.body);
+    try {
+        res.status(200).json({
+            status: "Success",
+            users
+        })
+    } catch(e) {
+        res.status(400).json({
+            Status: "Failed to post user",
+            message: e.message
+        })
+    }
+})
 
 module.exports = router;

@@ -9,8 +9,8 @@ const process = require('process');
 
 const PORT = process.env.PORT || 5000;
 const secret = process.env.SECRET;
-const url = process.env.MONGO;
-// const url = "mongodb://localhost:27017/contacts-manager"
+// const url = process.env.MONGO;
+const url = "mongodb://localhost:27017/contacts-manager"
 
 mongoose.connect(url) 
     .then(console.log('mongoose atlas is up'))
