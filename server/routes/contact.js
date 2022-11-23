@@ -69,4 +69,26 @@ router.get("/:key", async (req, res) => {
         })
     }
 })
+router.delete("/:arr", async (req, res) => {
+    try{
+        let arr=req.params.arr
+        for(let i=0;i<arr.length;i++){
+            const del=await contacts.deleteOne({_id:arr[i]})
+        }
+        
+    }catch(e){
+        console.log(e)
+    }
+})
+router.delete("/:id", async (req, res) => {
+    try{
+        let arr=req.params.id
+        const del=await contacts.deleteOne({_id})
+
+        
+    }catch(err){
+        console.log(err)
+    }
+})
+
 module.exports = router
