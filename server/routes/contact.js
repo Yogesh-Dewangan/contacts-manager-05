@@ -48,4 +48,25 @@ router.get("/",async  (req, res) => {
         })
     }
 })
+router.get("/:key", async (req, res) => {
+    try {
+        let contactlist = await contacts.findOne({
+            "$or": [
+                {
+                    email: { $regex: req.params.key }
+                }
+            ]
+        })
+        res.status(200).json({
+            contactlist
+        })
+    }
+    catch (e) {
+        res.status(400).json({
+            status: "Failed to search contact",
+            message: e.message
+
+        })
+    }
+})
 module.exports = router
