@@ -12,7 +12,7 @@ router.post("/import", async (req, res) => {
             industry: req.body.industry  ,
             email:req.body.email  ,
             phoneNumber: req.body.phoneNumber  ,
-            country: req.body.country 
+            country: req.body.country
         })
         console.log(req.body)
         res.status(200).json({
