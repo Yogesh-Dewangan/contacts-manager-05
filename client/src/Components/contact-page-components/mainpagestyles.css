@@ -1,0 +1,210 @@
+.contact-page {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid gray;
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-bar {
+    width: 75vw;
+    height: 10%;
+    border-bottom: 2px solid gray;
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    margin-left: 5px;
+
+}
+
+.contacts {
+    width: 77vw;
+    height: 81%;
+    margin: 10px;
+    /* border: 2px solid blue; */
+}
+
+.navtext {
+    float: left;
+}
+
+
+
+.profile {
+    float: right;
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+
+.side-bar {
+    width: 20vw;
+    height: 98vh;
+    /* border: 2px solid blue; */
+    display: grid;
+    grid-template-columns: 20vh 60vh 20vh;
+    background-color: #CEF3FF;
+
+}
+
+.logo {
+    width: 20vw;
+    height: 10%;
+
+    /* border: 1px solid rgb(176, 176, 220); */
+}
+
+.logo img {
+    height: 80%;
+    width: 20%;
+    border-radius: 50%;
+}
+
+.dash {
+    width: 20vw;
+    height: 70%;
+
+}
+
+.footer {
+    width: 20vw;
+    height: 16%;
+    color: white;
+    text-align: center;
+    padding-top: 0;
+}
+
+.dashboard {
+    width: 98%;
+    height: 20px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+
+
+}
+
+.total-contactstext {
+    width: 98%;
+    height: 50px;
+
+    border: 1px solid gray;
+    padding-top: 20px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+
+    color: #FFFFFF;
+    background: #2DA5FC;
+    border-radius: 6px;
+    opacity: 0.8;
+}
+
+.logtext {
+    margin-top: 0;
+    
+    font-family: 'Titillium Web';
+    
+    font-size: 18px;
+    line-height: 27px;
+    color: #000000;
+    opacity: 0.8;
+    bottom: 10px;
+}
+table{
+    width: 100%;
+    overflow: hidden;
+}
+thead {
+    background-color: #B2DFFF;
+    margin-right:20px ;
+
+}
+tbody{
+    row-gap: 10px;
+}
+tr{
+    border:1px solid  #B2DFFF; ;
+}
+tr:nth-child(even) {
+    box-shadow: 1px 1px 20px rgba(178, 223, 255, 0.43);
+    border-radius: 10px;
+    height: 30px;
+}
+tr:nth-child(even) {
+    background-color: #B2DFFF4F;
+    border-right: gray;
+    box-shadow: 1px 1px 20px rgba(178, 223, 255, 0.43);
+border-radius: 10px;
+    height: 30px;
+
+}
+
+td{
+    padding: 5px;
+}
+.td{
+    padding-left: 20px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    background-color: #e6f1f8;
+    color: rgb(4, 153, 153);
+    /* margin:5px; */
+  }
+.btn-container{
+    width: 100%;
+    height: 50px;
+    border-bottom:0.5px solid #B2DFFF;
+ 
+}
+.header-btns{
+  
+}
+.btn {
+    height: 30px;
+    background-color: #FFFFFF;
+    box-shadow: 1px 1px 10px rgb(146, 170, 171);
+    border: 1px solid rgb(173, 220, 222);
+    border-radius: 10px;
+} 
+.btn:hover{
+    background-color:  rgb(173, 220, 222);
+}
+.left{
+    float: left;
+    right: 10px;
+    margin: 7px;
+}
+.right{
+    float: right;
+    right: 10px;
+    margin: 7px;
+}
