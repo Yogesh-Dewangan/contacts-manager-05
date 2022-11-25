@@ -3,9 +3,11 @@ import deleted from "./images/im/delete.png"
 import edited from "./images/edit.png";
 import importd  from "./images/im/v1.png"
 import filter from "./images/filter.png";
+import DragNDrop from '../DragNDrop';
+import { DeleteConfirmationPopup, DeletedPopup } from '../deletePopups';
 
 import { Link } from "react-router-dom";
-export function CardContact({ contact }) {
+export function CardContact({ contact, setDeleteTrigger }) {
 
 
     // console.log(contact)
