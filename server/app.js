@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const registerRoute = require('./routes/register')
-const loginRoute = require('./routes/login')
+const signInRoute = require('./routes/login')
 const userRoute = require('./routes/user');
 const contactRoute = require('./routes/contact');
 const jwt = require('jsonwebtoken');
@@ -10,7 +10,7 @@ const process = require('process');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
-const secret = process.env.SECRET;
+const secret = "SECRET";  // process.env.SECRET;
 const url = process.env.MONGO;
 // const url = "mongodb://localhost:27017/contacts-manager"
 
@@ -20,8 +20,8 @@ mongoose.connect(url)
 
 const app = express();
 
-// app.use(cors());
-app.use('/v1/contact', (req, res, next) => {
+app.use(cors());
+app.use('/v1/contacts', (req, res, next) => {
     const token = req.headers.authorization;
     // console.log(token);
 
@@ -34,20 +34,21 @@ app.use('/v1/contact', (req, res, next) => {
                 })
             }
             if (decoded) {
+                // console.log(decoded)
                 req.user = decoded.data;
                 next();
             }
         })
     } else {
-        res.status(403).json({
+        return res.status(403).json({
             status: "Failed",
             message: "Invalid Token"
         })
     }
 })
 
-app.use('/v1', registerRoute);
-app.use('/v1', loginRoute);
+app.use('/v1/signup', registerRoute);
+app.use('/v1/signin', signInRoute);
 app.use('/v1/user', userRoute);
 app.use('/v1/contacts', contactRoute);
 
