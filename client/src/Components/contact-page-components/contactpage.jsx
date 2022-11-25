@@ -103,6 +103,8 @@ const Contacts = () => {
                             <td className="td" style={{ display: "flex", flexDirection: "row" }}>
                                 <button><img src={deleted} /></button>
                                 <button><img src={edited} /></button>
+                                <button onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg" /></button>
+                                <button><img src={edited} alt="editImg" /></button>
                             </td>
                         </tr>
                     )
