@@ -1,36 +1,59 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./SignIn.css"
-import {useNavigate} from 'react-router-dom'
-import { useAPI } from "./Context";
+import { useNavigate } from 'react-router-dom'
+import { context, useAPI } from "./Context";
+import axios from "axios"
 
 
-const SignUp=()=>{
-    const navigate=useNavigate();
+const SignUp = () => {
+    const navigate = useNavigate();
     const [login, setLogin] = useState({
         email: "",
         password: "",
         confirm_password: "",
-      });
+    });
 
-      const handleChange=(e)=>{
-        setLogin((curr)=>({...curr,[e.target.name]:e.target.value}))
-      };
+    const handleChange = (e) => {
+        setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }))
+    };
 
-      const {signUpUser}=useAPI();
-      const UserLogin=()=>{
+    const URL = "/"
+    const signUpUrl = `${URL}/signup`;
+
+    const signUpUser = (userData) => {
+        try {
+            axios
+                .post(signUpUrl, userData)
+                .then((res) => {
+                    console.log(res)
+                    // navigate("/")
+                }).catch((err) => {
+                    console.log(err);
+                    alert("Failed Registration");
+                })
+        }
+
+        catch (error) {
+            alert(error.message);
+        }
+    }
+
+    //   const {signUpUser}= context(); //useAPI();
+
+    const UserLogin = () => {
         signUpUser(login)
-      };
+    };
 
-      return(
+    return (
 
         <div className="login-page">
             <h1>Logo</h1>
             <p>create a new account</p>
             <div className="login-container">
-                <form onSubmit={(e)=>{e.preventDefault()}}>
-                    
+                <form onSubmit={(e) => { e.preventDefault() }}>
+
                     <input
-                        onChange={(e)=>handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                         type="email"
                         name="email"
                         id="email"
@@ -54,9 +77,10 @@ const SignUp=()=>{
                     />
 
                     <div className="signUpbtnContainer">
-                        <button className="signup" onClick={UserLogin}>
+                        <button onClick={UserLogin} className="signup">
                             Sign Up
                         </button>
+
                         <button className="signup signinAnkit" onClick={() => navigate("/")}>
                             Sign In
                         </button>
@@ -66,7 +90,9 @@ const SignUp=()=>{
             </div>
 
         </div>
-      )
+    )
 
 
 }
+
+export default SignUp

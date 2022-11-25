@@ -8,36 +8,45 @@ const secret = "SECRET";
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
 
-router.post("/",async (req,res)=>{
+router.post("/", async(req,res)=>{
+    try{
     const email=req.body.email;
     const password=req.body.password;
-    const userData=await user.findOne({email:email})
+    const userData=await user.findOne({email})
 
-    if(userData != null){
-        var result= await bcrypt.compare(password,userData.password);
-        if(result){
-            const token=jwt.sign(
-                {
-                    exp:Math.floor(Date.now()/10) ,
-                    data: userData._id
-                },
-                secret
-            );
-            res.status(200).json({
-                status:"Successful",
-                token:token
-            });
-        }
-    else{
-        res.status(400).json({
-            status:"failed Login",
-            message:"Wrong Password"
+    if(userData){
+        bcrypt.compare(password, userData.password, async (err, result) => {
+            if(err) {
+                return res.status(400).json({
+                    status: "Failed",
+                    message: err.message
+                })
+            }
+            if(result){
+                const token=jwt.sign(
+                    {
+                        exp: Math.floor(Date.now()/1000) + 60*60,
+                        data: userData._id
+                    },
+                    secret
+                );
+                return res.status(200).json({
+                    status:"Login Successful",
+                    token:token
+                });
+            }
+        
+    })
+    }else{
+        return res.status(200).json({
+            status: "Failed",
+            message: "Invalid credentials! Please provide valid email/password"
         })
     }
-}else{
-    res.status(400).json({
-        status:"Failed Login",
-        message:"No user Found"
+} catch(e) {
+    res.status(500).json({
+        status: "Failed",
+        message: e.message
     })
 }
     
