@@ -28,7 +28,7 @@ export function APIContextProvider({ children }) {
                 navigate("/")
             }).catch((err)=>{
                 console.log(err);
-                windows.alert("Failed Registration");
+                // windows.alert("Failed Registration");
             })
         }
 
@@ -50,7 +50,7 @@ export function APIContextProvider({ children }) {
 
             }).catch((err)=>{
                 console.log(err)
-                windows.alert("Invalid Credentials . Try Again")
+                // windows.alert("Invalid Credentials . Try Again")
             })
 
             return(
