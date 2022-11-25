@@ -9,7 +9,7 @@
 
 .nav-bar {
     width: 75vw;
-    height: 10%;
+    height: 10vh;
     border-bottom: 2px solid gray;
     display: grid;
     grid-template-columns: 30% 50% 20%;
@@ -19,7 +19,7 @@
 
 .contacts {
     width: 77vw;
-    height: 81%;
+    height: 71vh;
     margin: 10px;
     /* border: 2px solid blue; */
 }
@@ -207,4 +207,39 @@ td{
     float: right;
     right: 10px;
     margin: 7px;
+}
+.pagenumbers{
+    list-style: none;
+    display:flex;
+    float: right;
+   margin-top: 50px;
+}
+.pagenumbers li {
+    padding: 6px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+.pagenumbers li.active{
+    background-color: #CEF3FF;
+    color: black;
+}
+.pagenumbers li button{
+    background-color: transparent;
+    color: black;
+    border: none;
+    
+    cursor: pointer;
+}
+.pagenumbers li button:hover{
+    background-color: rgb(182, 175, 187);
+    color: black;
+}
+.pagenumbers li button:focus{
+    outline: none;
+}
+.pagenumbers-container{
+    height: 15vh;
+ 
+    bottom: 0;
+
 }

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import deleted from "./images/im/delete.png"
+import edited from "./images/edit.png";
 import importd  from "./images/im/v1.png"
 import filter from "./images/filter.png";
-import edited from "./images/edit.png";
-import DragNDrop from '../DragNDrop' //'./Components/DragNDrop';
-import { DeleteConfirmationPopup, DeletedPopup } from '../deletePopups'  //'./Components/deletePopups';
 
-export function CardContact({contact, setDeleteTrigger}) {
+import { Link } from "react-router-dom";
+export function CardContact({ contact }) {
 
 
     // console.log(contact)
@@ -93,4 +92,9 @@ export function Buttons({deleteTrigger, setDeleteTrigger}) {
 
 
     )
+}
+export function Li(){
+    return(<li>
+        vinee
+    </li>)
 }

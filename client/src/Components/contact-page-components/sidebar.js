@@ -2,6 +2,7 @@ import React  from "react"
 import logo from "./images/logoimage.png"
 import logout from "./images/im/logout.png"
 import contact from "./images/contact.png"
+import { Link } from "react-router-dom"
 
 const Sidebar=()=>{
     return(
@@ -19,10 +20,13 @@ const Sidebar=()=>{
                     total contacts </div>
                 </div>
                 <footer className="footer">
+                    <Link to="/signIn">
                     <button style={{display:"flex",flexDirection:"row",width:"80%",marginLeft:"10px"}}>
                         <img src={logout} alt="logoutImg"/>
                         <div className="logtext">Log out</div>
                     </button>
+                    </Link>
+                    
                     
                 </footer>
             </div>
