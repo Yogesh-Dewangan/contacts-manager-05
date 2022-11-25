@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAPI } from './Context'
 import './SignIn.css'
 
@@ -9,7 +9,7 @@ const SignIn=()=>{
         password:""
     });
 
-    const {loginUser}=useAPI();
+    const {loginUser} = useAPI();
 
     const handleChange = (e) => {
         setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }));

@@ -8,19 +8,19 @@ const Sidebar=()=>{
         <div className="side-bar">
             <div>
                 <div className="logo">
-                    <img src={logo} styles={{height:"30px",width:"50px"}} alt="image"/>
+                    <img src={logo} styles={{height:"30px",width:"50px"}} alt="logoImg"/>
                 </div>
                 <div className="dash">
                 <h3 className="dashboard">
                     
                      Dashboard</h3>
                 <div className="total-contactstext">
-                <img src={contact} style={{marginRight:"10px"}}/>
-                    total contacts</div>
+                <img src={contact} style={{marginRight:"10px"}} alt="contacyImg"/>
+                    total contacts </div>
                 </div>
                 <footer className="footer">
                     <button style={{display:"flex",flexDirection:"row",width:"80%",marginLeft:"10px"}}>
-                        <img src={logout}/>
+                        <img src={logout} alt="logoutImg"/>
                         <div className="logtext">Log out</div>
                     </button>
                     

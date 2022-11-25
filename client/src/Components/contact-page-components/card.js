@@ -3,10 +3,13 @@ import deleted from "./images/im/delete.png"
 import importd  from "./images/im/v1.png"
 import filter from "./images/filter.png";
 import edited from "./images/edit.png";
-export function CardContact({ contact }) {
+import DragNDrop from '../DragNDrop' //'./Components/DragNDrop';
+import { DeleteConfirmationPopup, DeletedPopup } from '../deletePopups'  //'./Components/deletePopups';
+
+export function CardContact({contact, setDeleteTrigger}) {
 
 
-    console.log(contact)
+    // console.log(contact)
     return (
         <tr>
 
@@ -25,8 +28,8 @@ export function CardContact({ contact }) {
             <td className="td">{contact.phoneNumber}</td>
             <td className="td">{contact.country}</td>
             <td className="td" style={{display:"flex",flexDirection:"row"}}>
-                <button><img src={deleted}/></button>
-                <button><img src={edited}/></button>
+                <button onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg"/></button>
+                <button><img src={edited} alt="editImg"/></button>
             </td>
         </tr>
     )
@@ -47,7 +50,11 @@ export function Cardheaders() {
         </tr>
     )
 }
-export function Buttons() {
+export function Buttons({deleteTrigger, setDeleteTrigger}) {
+
+    const [importTrigger, setImportTrigger] = useState(false);
+    const [deleteCompleteTrigger, setDeleteCompleteTrigger] = useState(false);
+
     return (
         <div className="header-btns">
             <div>
@@ -63,12 +70,17 @@ export function Buttons() {
                     </button>
 
                     <button className="btn left">
-                        <img src={filter}/>
+                        <img src={filter} alt="filterImg"/>
                         Filter .
                     </button>
+                    <DragNDrop importTrigger={importTrigger} setImportTrigger={setImportTrigger}/>
+
+                    {(deleteTrigger) ? <DeleteConfirmationPopup setDeleteTrigger={setDeleteTrigger} setDeleteCompleteTrigger={setDeleteCompleteTrigger}/> : ""}
+
+                    {(deleteCompleteTrigger) ? <DeletedPopup /> : ""}
                     <button className="btn right">Export</button>
-                    <button className="btn right"><img src={importd}/> Import</button>
-                    <button className="btn right"><img src={deleted}/> Delete</button>
+                    <button className="btn right" onClick={() => setImportTrigger(true)}><img src={importd} alt="importImg"/> Import</button>
+                    <button className="btn right" onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg"/> Delete</button>
 
                 
 
