@@ -190,14 +190,14 @@ const Contacts = () => {
             </div>
             <div className="contacts">
                 <div className="btn-container">
-                    <Buttons />
+                    <Buttons deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
                 </div>
 
 
                 <table>
                     <thead>
 
-                        <Cardheaders />
+                        <Cardheaders setDeleteTrigger={setDeleteTrigger}/>
                     </thead>
                     <tbody>
                         {
