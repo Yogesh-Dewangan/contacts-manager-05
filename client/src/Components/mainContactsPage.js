@@ -11,7 +11,6 @@ const MainContactsPage = () => {
                 <Sidebar />
             </div>
             <div>
-                 
                 <Contacts />
             </div>
 
