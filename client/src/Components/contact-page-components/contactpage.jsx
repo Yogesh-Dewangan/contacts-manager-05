@@ -5,6 +5,9 @@ import { Buttons, CardContact, Cardheaders } from "./card"
 import NavBar from "./navbar"
 
 const Contacts = () => {
+
+    const [deleteTrigger, setDeleteTrigger] = useState(false);
+
     var data = [
 
         {
@@ -43,7 +46,7 @@ const Contacts = () => {
     },[])
     const getcontacts=async ()=>{
         try{
-            let res=await axios.get('https://jsonplaceholder.typicode.com/posts')
+            let res=await axios.get('/v1/contacts')  // ('https://jsonplaceholder.typicode.com/posts')
             res=await res.data
            // setcontacts(res)
             console.log(res);
@@ -59,7 +62,7 @@ const Contacts = () => {
         </div>
             <div className="contacts">
             <div className="btn-container">
-            <Buttons/>
+            <Buttons deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
             </div>
             <table>
                 <thead>
@@ -75,7 +78,7 @@ const Contacts = () => {
                            let len=contacts.length
                             let val=index
                             return (
-                                 <CardContact contact={contact} key={index}/>
+                                 <CardContact contact={contact} key={index} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
                             )
 
                         })
