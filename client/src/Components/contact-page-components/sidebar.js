@@ -27,7 +27,7 @@ const Sidebar=()=>{
                         onClick={() => {
                             navigate("/");
                             localStorage.clear("token");
-                            window.location.reload();
+                            // window.location.reload();
                           }}
                         />
                         <div className="logtext">Log out</div>

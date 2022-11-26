@@ -11,10 +11,11 @@ import edited from "./images/edit.png";
 const Contacts = () => {
 
     const [deleteTrigger, setDeleteTrigger] = useState(false);
-
+    const [selection, setselectionarr] = useState([])
     var data = [
 
         {
+            _id: 6542786873,
             name: "vineetha",
             designation: "student",
             company: "10x",
@@ -24,6 +25,7 @@ const Contacts = () => {
             country: "India"
         },
         {
+            _id: 654278684373,
             name: "ankit",
             designation: "student",
             company: "10x",
@@ -33,6 +35,7 @@ const Contacts = () => {
             country: "India"
         },
         {
+            _id: 65427868784373,
             name: "yogesh",
             designation: "student",
             company: "10x",
@@ -43,17 +46,36 @@ const Contacts = () => {
         }
     ]
 
-
-
+    const [ischecked, setischecked] = useState([])
+    const [seletallpage,setselectedallpage]=useState([])
     const [contacts, setcontacts] = useState(data)
     //const [perpage,setperpage]=useState([])
-    const [currentpage, setcurrentpage] = useState(1)
-    const [itemperpage, setitemperpage] = useState(2)
+    const [currentpage, setcurrentpage] = useState(1)//1,2,3
+    const [itemperpage, setitemperpage] = useState(1)//how many items per page
 
 
     const [pagenumberlimit, setpagenumberlimit] = useState(5)
-    const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(2)
+    const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(1)//
     const [minpagenumberlimit, setminpagenumberlimit] = useState(0)
+
+const handlecheckbox=(e)=>{
+    const {value,checked}=e.target
+    console.log(value);
+    if(checked){
+        setischecked([...ischecked,value])
+    }
+    else{//uncheck
+        setischecked(ischecked.filter((e)=>e!==value))
+    }
+}
+
+const allDElete=async()=>{
+    console.log(ischecked)
+}
+// console.log(ischecked)
+
+
+
 
     const handleclick = (event) => {
         setcurrentpage(Number(event.target.id))
@@ -66,27 +88,19 @@ const Contacts = () => {
     }
     const renderconts = (conts) => {
         return (
-            // <>{conts.map((con, index) => {
-            //     //console.log(con);
-            //     return (
-            //         <div key={index} style={{ border: "1px solid black", margin: "1px" }}>
-            //             <div> {con.title} </div>
-
-            //         </div>
-            //     )
-            // })}</>
 
             <>{
                 conts.map((contact, index) => {
-                    //console.log(contact);
-                    //const { name, designation, company, industry, email, phoneNumber, country } = contact;
-                    //console.log(name, designation, company, industry, email, phoneNumber, country)
                     let len = contacts.length
                     let val = index
                     return (
-                        <tr>
+                        <tr key={index}>
+                            <td className="tdinp"> 
+                            <input type="checkbox" value={contact._id} checked={contact.ischecked}
+                                onChange={(e) => {
+                                    handlecheckbox(e)
+                                }} /></td>
 
-                            <td className="tdinp"> <input type="checkbox" /></td>
                             <td className="td">{contact.name}</td>
                             <td className="td">{contact.designation}</td>
                             <td className="td">{contact.company}</td>
@@ -101,9 +115,9 @@ const Contacts = () => {
                             <td className="td">{contact.phoneNumber}</td>
                             <td className="td">{contact.country}</td>
                             <td className="td" style={{ display: "flex", flexDirection: "row" }}>
-                              
+
                                 <button onClick={() => setDeleteTrigger(true)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
-                                <button><img src={edited} alt="editImg" className="actionimage"/></button>
+                                <button><img src={edited} alt="editImg" className="actionimage" onClick={allDElete}/></button>
                             </td>
                         </tr>
                     )
@@ -191,14 +205,14 @@ const Contacts = () => {
             </div>
             <div className="contacts">
                 <div className="btn-container">
-                    <Buttons deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger}/>
+                    <Buttons deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
                 </div>
 
 
                 <table>
                     <thead>
 
-                        <Cardheaders setDeleteTrigger={setDeleteTrigger}/>
+                        <Cardheaders setDeleteTrigger={setDeleteTrigger} setselectedallpage={setselectedallpage} currentItems={currentItems}/>
                     </thead>
                     <tbody>
                         {

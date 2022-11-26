@@ -12,7 +12,7 @@ const SignIn = () => {
 
     const [userEmail, setUserEmail] = useState("");
 
-    const URL = "/"
+    const URL = "http://localhost:5000/v1"
     const loginUrl = `${URL}/signin`
 
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ const SignIn = () => {
     };
     const UserLogin = () => {
         loginUser(login);
-        navigate("/mainContactsPage")
+        navigate("/contact")
 
     };
 

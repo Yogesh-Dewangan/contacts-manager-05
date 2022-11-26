@@ -17,7 +17,7 @@ const SignUp = () => {
         setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }))
     };
 
-    const URL = "/"
+    const URL = "http://localhost:5000/v1"
     const signUpUrl = `${URL}/signup`;
 
     const signUpUser = (userData) => {
@@ -26,7 +26,7 @@ const SignUp = () => {
                 .post(signUpUrl, userData)
                 .then((res) => {
                     console.log(res)
-                    // navigate("/")
+                     navigate("/")
                 }).catch((err) => {
                     console.log(err);
                     alert("Failed Registration");
