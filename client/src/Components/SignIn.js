@@ -17,14 +17,16 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
-    const loginUser = (loginData) => {
-        axios
+    const loginUser = async (loginData) => {
+        await axios
             .post(loginUrl, loginData)
             .then((res) => {
+                console.log(res);
+                navigate("/contact")
                 const token = res.data.token;
+                // console.log('from SignIn component token:', token)
                 localStorage.setItem("token", token)
-                localStorage.setItem("email", loginData.email);
-                // navigate("/mainContactsPage")
+                // localStorage.setItem("email", loginData.email);
                 // document.location.reload();
                 setUserEmail(loginData.email);
 
@@ -33,29 +35,34 @@ const SignIn = () => {
                 alert("Invalid Credentials . Try Again")
             })
     }
-
-    // const {loginUser} = context(); //useAPI();
+    
+    const submitHandler = (e) => {
+        e.preventDefault();
+        loginUser(login);
+    };
 
     const handleChange = (e) => {
         setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }));
     };
-    const UserLogin = () => {
-        loginUser(login);
-        navigate("/contact")
+    // const UserLogin = () => {
+    //     loginUser(login);
+    //     navigate("/contact")
 
-    };
+    // };
 
     return (
         <div className='login-page'>
             <h1>Logo</h1>
             <p>Enter your credentials to access your account</p>
             <div className='login-container'>
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form method='POST' onSubmit={submitHandler}>
                     <input
                         onChange={(e) => handleChange(e)}
                         type="email"
                         name="email"
+                        value={login.email}
                         className="email"
+                        placeholder="abc@xyz.com"
                     />
 
                     <input
@@ -63,10 +70,11 @@ const SignIn = () => {
                         type="password"
                         name="password"
                         className="password"
+                        value={login.password}
                         placeholder="Password"
                     />
 
-                    <button onClick={UserLogin} className="signIn">
+                    <button className="signIn">
                         Sign In
                     </button>
 
