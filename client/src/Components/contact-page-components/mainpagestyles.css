@@ -1,31 +1,62 @@
 .contact-page {
-    margin: 0;
+    margin-left:50px;
+    margin-right:50px;
     display: flex;
     flex-direction: row;
     border: 2px solid gray;
     width: 100vw;
+    background-color: #CEF3FF;
     height: 100vh;
+    overflow: hidden;
 }
-
+.main{
+    width: auto;
+   
+}
 .nav-bar {
-    width: 75vw;
+    width: 80vw;
+    background-color: #CEF3FF;
+
     height: 10vh;
-    border-bottom: 2px solid gray;
+   min-height:80px ;
+    /* border-bottom: 2px solid rgb(137, 219, 239); */
     display: grid;
-    grid-template-columns: 30% 50% 20%;
+    grid-template-columns: 25% 50% 25%;
     margin-left: 5px;
+    padding-top: 10px;
 
 }
+.search-container{
+    height: 30px;
+    align-items: center;
+     padding-left: 20%;
+     margin-top: 10px;
+     /* border: 1px solid #B2DFFF; */
+}
+.search-container input{
+    height: 30px;
+    width: 180px;
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 5px;
+    background-color: #9ed5fc;
+}
+
 
 .contacts {
-    width: 77vw;
+    width: 100%;
     height: 71vh;
     margin: 10px;
+    margin-left: 10px;
+    background-color: #f2f7f9;
+    border-radius: 8px;
+    /* overflow: hidden; */
     /* border: 2px solid blue; */
 }
 
 .navtext {
     float: left;
+    margin-bottom:10px ;
 }
 
 
@@ -34,23 +65,31 @@
     float: right;
     display: grid;
     grid-template-columns: auto auto;
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .side-bar {
-    width: 20vw;
+
+    width: 205px;
+
     height: 98vh;
     /* border: 2px solid blue; */
     display: grid;
     grid-template-columns: 20vh 60vh 20vh;
-    background-color: #CEF3FF;
+    background-color: #82d3ef;
 
 }
 
 .logo {
     width: 20vw;
     height: 10%;
-
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
     /* border: 1px solid rgb(176, 176, 220); */
 }
 
@@ -58,6 +97,8 @@
     height: 80%;
     width: 20%;
     border-radius: 50%;
+    margin: 0;
+
 }
 
 .dash {
@@ -70,14 +111,22 @@
     width: 20vw;
     height: 16%;
     color: white;
-    text-align: center;
+
     padding-top: 0;
+}
+.logoutbtn{
+    height: 30px;
+    max-width: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: transparent;
 }
 
 .dashboard {
     width: 98%;
     height: 20px;
-    font-family: 'Titillium Web';
+    font-family: 'Open Sans", sans-serif;';
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -87,27 +136,33 @@
 }
 
 .total-contactstext {
-    width: 98%;
-    height: 50px;
+    min-width: 200px;
+    max-width: 205px;
+    height: 50px;;
 
     border: 1px solid gray;
-    padding-top: 20px;
-    font-family: 'Titillium Web';
-    font-style: normal;
+   align-items: center;
+    font-family: sans-serif;
+
     font-weight: 600;
     font-size: 18px;
-
+    display: flex;
+    flex-direction: row;
     color: #FFFFFF;
     background: #2DA5FC;
     border-radius: 6px;
     opacity: 0.8;
+    margin-left: 0;
+}
+.contactImg{
+    padding-left: 0;
 }
 
 .logtext {
     margin-top: 0;
-    
+
     font-family: 'Titillium Web';
-    
+
     font-size: 18px;
     line-height: 27px;
     color: #000000;
@@ -115,12 +170,17 @@
     bottom: 10px;
 }
 table{
+    margin-right: 10px;
+
     width: 100%;
     overflow: hidden;
+    padding-top: 10px;
 }
 thead {
     background-color: #B2DFFF;
     margin-right:20px ;
+    width: 100%;
+
 
 }
 tbody{
@@ -128,6 +188,9 @@ tbody{
 }
 tr{
     border:1px solid  #B2DFFF; ;
+    overflow: hidden;
+    /* display: flex;
+    flex-direction: row; */
 }
 tr:nth-child(even) {
     box-shadow: 1px 1px 20px rgba(178, 223, 255, 0.43);
@@ -142,22 +205,44 @@ border-radius: 10px;
     height: 30px;
 
 }
-
+/* 
 td{
     padding: 5px;
+} */
+.tdinp{
+    height: auto;
+    width: 20px;
 }
 .td{
     padding-left: 20px;
     padding-right: 10px;
     text-align: center;
-}
 
+}
+.texth{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+ }
+ .textd{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+.tdemail{
+    width: auto;
+
+}
+.actionimage{
+    margin: 0
+}
 .tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
   }
-  
+
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 200px;
@@ -166,35 +251,44 @@ td{
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-  
-  
+
+
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
   }
-  
+
   .tooltip:hover .tooltiptext {
     visibility: visible;
     background-color: #e6f1f8;
     color: rgb(4, 153, 153);
     /* margin:5px; */
   }
+
 .btn-container{
     width: 100%;
-    height: 50px;
+    height: 60px;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-bottom:0.5px solid #B2DFFF;
- 
+
 }
 .header-btns{
-  
+
 }
 .btn {
     height: 30px;
+    width: 100px;
     background-color: #FFFFFF;
     box-shadow: 1px 1px 10px rgb(146, 170, 171);
     border: 1px solid rgb(173, 220, 222);
     border-radius: 10px;
-} 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 5px;
+}
 .btn:hover{
     background-color:  rgb(173, 220, 222);
 }
@@ -227,7 +321,7 @@ td{
     background-color: transparent;
     color: black;
     border: none;
-    
+
     cursor: pointer;
 }
 .pagenumbers li button:hover{
@@ -239,7 +333,7 @@ td{
 }
 .pagenumbers-container{
     height: 15vh;
- 
+
     bottom: 0;
 
 }
