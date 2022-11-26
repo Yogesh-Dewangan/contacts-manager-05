@@ -8,9 +8,10 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const process = require('process');
 const cors = require('cors');
+// const SESSIONID = require('./routes/login');
 
 const PORT = process.env.PORT || 5000;
-const secret = "SECRET";  // process.env.SECRET;
+const secret = process.env.SECRET;
 const url = process.env.MONGO;
 // const url = "mongodb://localhost:27017/contacts-manager"
 
@@ -23,7 +24,7 @@ const app = express();
 app.use(cors());
 app.use('/v1/contacts', (req, res, next) => {
     const token = req.headers.authorization;
-    // console.log(token);
+    // console.log('token', token);
 
     if(token) {
         jwt.verify(token, secret, (err, decoded) => {
