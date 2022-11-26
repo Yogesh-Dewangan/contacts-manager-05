@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import prof from "./images/prof.png"
 import React, { useState } from "react"
 const NavBar = ({ getcontacts, setcontacts }) => {
     const [search, setsearch] = useState("")
@@ -43,15 +43,16 @@ const NavBar = ({ getcontacts, setcontacts }) => {
             </div>
             <div className="search-container">
                 <i className="fa fa-search icon"></i>
-                <input className="input-field" type="text" onChange={searchHandle} />
+                <input className="input-field"  placeholder="Search..." type="text" onChange={searchHandle} />
 
             </div>
             <div className="profile">
                 <div>
-                    <img className="profile-img" src="" />
+                    <img className="profile-img" src={prof} />
                 </div>
 
                 <div>
+                
                     <div>name</div>
                     <div>Super Admin</div>
                 </div>

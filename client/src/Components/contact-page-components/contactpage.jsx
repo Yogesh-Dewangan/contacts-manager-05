@@ -48,7 +48,7 @@ const Contacts = () => {
     const [contacts, setcontacts] = useState(data)
     //const [perpage,setperpage]=useState([])
     const [currentpage, setcurrentpage] = useState(1)
-    const [itemperpage, setitemperpage] = useState(1)
+    const [itemperpage, setitemperpage] = useState(3)
 
 
     const [pagenumberlimit, setpagenumberlimit] = useState(5)
@@ -86,12 +86,12 @@ const Contacts = () => {
                     return (
                         <tr>
 
-                            <td> <input type="checkbox" /></td>
+                            <td className="tdinp"> <input type="checkbox" /></td>
                             <td className="td">{contact.name}</td>
                             <td className="td">{contact.designation}</td>
                             <td className="td">{contact.company}</td>
                             <td className="td">{contact.industry}</td>
-                            <td className="td">
+                            <td className="tdemail">
                                 <div className="tooltip">
                                     {contact.email}
                                     <span className="tooltiptext"> {contact.email}</span>
@@ -101,10 +101,9 @@ const Contacts = () => {
                             <td className="td">{contact.phoneNumber}</td>
                             <td className="td">{contact.country}</td>
                             <td className="td" style={{ display: "flex", flexDirection: "row" }}>
-                                <button><img src={deleted} /></button>
-                                <button><img src={edited} /></button>
-                                <button onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg" /></button>
-                                <button><img src={edited} alt="editImg" /></button>
+                              
+                                <button onClick={() => setDeleteTrigger(true)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
+                                <button><img src={edited} alt="editImg" className="actionimage"/></button>
                             </td>
                         </tr>
                     )
