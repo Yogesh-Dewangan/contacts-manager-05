@@ -30,7 +30,7 @@ const Sidebar=()=>{
                             // window.location.reload();
                           }}
                         />
-                        <div className="logtext">Log out</div>
+                        <div className="logtext">Logout</div>
                     </button>
                     </Link>
                     
