@@ -48,7 +48,7 @@ const Contacts = () => {
     const [contacts, setcontacts] = useState(data)
     //const [perpage,setperpage]=useState([])
     const [currentpage, setcurrentpage] = useState(1)
-    const [itemperpage, setitemperpage] = useState(3)
+    const [itemperpage, setitemperpage] = useState(2)
 
 
     const [pagenumberlimit, setpagenumberlimit] = useState(5)
