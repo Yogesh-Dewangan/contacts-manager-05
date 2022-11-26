@@ -65,7 +65,7 @@ const handlecheckbox=(e)=>{
         setischecked([...ischecked,value])
     }
     else{//uncheck
-        setischecked(ischecked.filter((e)=>e!==value))
+        setischecked(ischecked.filter((e)=>e!==value))//finding the value of 
     }
 }
 
@@ -212,7 +212,11 @@ const allDElete=async()=>{
                 <table>
                     <thead>
 
-                        <Cardheaders setDeleteTrigger={setDeleteTrigger} setselectedallpage={setselectedallpage} currentItems={currentItems}/>
+                        <Cardheaders setDeleteTrigger={setDeleteTrigger} 
+                        setselectedallpage={setselectedallpage}
+                        handlecheckbox={handlecheckbox}
+                        ischecked={ischecked}
+                         currentItems={currentItems}/>
                     </thead>
                     <tbody>
                         {
