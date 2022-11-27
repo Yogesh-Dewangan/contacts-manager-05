@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const process = require('process');
 const cors = require('cors');
-// const SESSIONID = require('./routes/login');
 
 const PORT = process.env.PORT || 5000;
 const secret = process.env.SECRET;
