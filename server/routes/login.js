@@ -37,13 +37,13 @@ router.post("/", async(req,res)=>{
                 SESSIONID = token;
                 return res.status(200).json({
                     status:"Login Successful",
-                    token:token
+                    token
                 });
             }
         
     })
     }else{
-        return res.status(200).json({
+        return res.status(400).json({
             status: "Failed",
             message: "Invalid credentials! Please provide valid email/password"
         })
@@ -61,7 +61,7 @@ router.get('/get-current-user', (req, res) => {
     const sessionId = req.query.sessionId;
     // console.log('from get-current-uesr sessionId:', sessionId);
     // console.log('from get-current-uesr SESSIONID:', SESSIONID);
-    console.log(sessionId === SESSIONID);
+    // console.log(sessionId === SESSIONID);
     if(sessionId === SESSIONID) {
         res.status(200).send(true);
     } else {

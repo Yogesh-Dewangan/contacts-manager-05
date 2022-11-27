@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PopUp from './PopUp';
 import {parse} from 'papaparse';
-import {postContacts} from './apiutils';
+import {getContacts, postContacts} from './apiutils';
 import importImg from './images/importImg.svg'
 import completedImg from './images/completedImg.svg'
 
@@ -37,9 +37,10 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
                 console.log('contacts', contactArr);
                 postContacts(contactArr) //, setImportTrigger, setImportCompleteTrigger
                 .then(res => {
-                    console.log(res)
+                    console.log("added contacts",res)
                     setImportTrigger(false);
                     setImportCompleteTrigger(true);
+                    document.location.reload();
                     setTimeout(() => {
                         setImportCompleteTrigger(false)
                     }, 2000);

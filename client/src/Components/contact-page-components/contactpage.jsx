@@ -91,8 +91,12 @@ const Contacts = () => {
 
     }
 
-    const allDElete = async () => {
-        console.log(ischecked)
+    // let deleteThisContact = '';
+    const allDElete = (e) => {
+        setDeleteTrigger(true);
+        // deleteThisContact = e.target.id
+        // console.log(e.currentTarget.id)
+        setischecked([e.currentTarget.id]);
     }
 
     const handleclick = (event) => {
@@ -128,14 +132,14 @@ const Contacts = () => {
                     <td className="td">{contact.country}</td>
                     {/* action buttons */}
                     <td className="td" style={{ display: "flex", flexDirection: "row" }}>
-                        <button onClick={() => setDeleteTrigger(true)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
-                        <button><img src={edited} alt="editImg" className="actionimage" onClick={allDElete} /></button>
+                        <button id={contact._id} onClick={(e) => allDElete(e)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
+                        <button><img src={edited} alt="editImg" className="actionimage"/></button>
                     </td>
                 </tr>
             )
         })} </>)
     }
-
+    // onClick={() => setDeleteTrigger(true)}
 
     const renderpagenumbers = pages.map(pgnumber => {
         if (pgnumber < maxpagenumberlimit + 1 && pgnumber > minpagenumberlimit) {
@@ -153,11 +157,11 @@ const Contacts = () => {
     return (
         <div className="main">
             <div className="nav">
-                <NavBar getproducts={getContacts} setcontacts={setcontacts} />
+                <NavBar getproducts={getContacts} />
             </div>
             <div className="contacts">
                 <div className="btn-container">
-                    <Buttons deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+                    <Buttons isChecked={ischecked} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
                 </div>
                 <table>
                     <thead>

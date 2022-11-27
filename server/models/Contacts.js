@@ -9,7 +9,7 @@ const contactSchema = new Schema({
     email: {type: String, required: true},
     phoneNumber: {type: Number, required: true},
     country: {type: String, required: true},
-    userRef: {type: Schema.Types.ObjectId, ref: "User"}
+    userRef: [{type: Schema.Types.ObjectId, ref: "User"}]
 });
 
 const ContactModel = mongoose.model('Contact', contactSchema);

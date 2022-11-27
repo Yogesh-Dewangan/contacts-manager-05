@@ -22,14 +22,12 @@ const Sidebar=()=>{
                 </div>
                 <footer className="footer">
                     <Link to="/">
-                    <button className="logoutbtn" style={{display:"flex",flexDirection:"row",width:"80%",marginLeft:"10px"}}>
-                        <img src={logout} alt="logoutImg"
-                        onClick={() => {
-                            navigate("/");
+                    <button className="logoutbtn" onClick={() => {
+                            // navigate("/");
                             localStorage.clear("token");
                             // window.location.reload();
-                          }}
-                        />
+                          }} style={{display:"flex",flexDirection:"row",width:"80%",marginLeft:"10px"}}>
+                        <img src={logout} alt="logoutImg"/>
                         <div className="logtext">Logout</div>
                     </button>
                     </Link>

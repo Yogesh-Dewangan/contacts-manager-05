@@ -34,7 +34,7 @@ app.use('/v1/contacts', (req, res, next) => {
                 })
             }
             if (decoded) {
-                // console.log(decoded)
+                // console.log('req.user', decoded.data)
                 req.user = decoded.data;
                 next();
             }

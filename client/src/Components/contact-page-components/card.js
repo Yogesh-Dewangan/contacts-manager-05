@@ -50,7 +50,7 @@ export function Cardheaders() {
         </tr>
     )
 }
-export function Buttons({ deleteTrigger, setDeleteTrigger }) {
+export function Buttons({ deleteTrigger, setDeleteTrigger, isChecked }) {
 
     const [importTrigger, setImportTrigger] = useState(false);
     const [deleteCompleteTrigger, setDeleteCompleteTrigger] = useState(false);
@@ -75,7 +75,7 @@ export function Buttons({ deleteTrigger, setDeleteTrigger }) {
                     </button>
                     <DragNDrop importTrigger={importTrigger} setImportTrigger={setImportTrigger} />
 
-                    {(deleteTrigger) ? <DeleteConfirmationPopup setDeleteTrigger={setDeleteTrigger} setDeleteCompleteTrigger={setDeleteCompleteTrigger} /> : ""}
+                    {(deleteTrigger) ? <DeleteConfirmationPopup isChecked={isChecked} setDeleteTrigger={setDeleteTrigger} setDeleteCompleteTrigger={setDeleteCompleteTrigger} /> : ""}
 
                     {(deleteCompleteTrigger) ? <DeletedPopup /> : ""}
                     <button className="btn right">Export</button>

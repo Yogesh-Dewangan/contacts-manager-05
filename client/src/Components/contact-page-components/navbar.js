@@ -1,41 +1,40 @@
 import axios from "axios"
 import prof from "./images/prof.png"
 import React, { useState } from "react"
-const NavBar = ({ getcontacts, setcontacts }) => {
+// import { getContacts } from "../apiutils"
+
+const NavBar = ({ setcontacts }) => {
     const [search, setsearch] = useState("")
-    const searchHandle = async (event) => {
-        //    
-        //     if(key){
+    const searchHandle = async (e) => {
+        let key = e.target.value
+        if (key) {
+            await axios.get(`http://localhost:5000/v1/contacts/${key}`,
+                {
+                    headers:
+                        { 'Authorization': localStorage.getItem('token') }
+                })
+                .then(res => {
+                    console.log(res.data.contactlist);
+                    if (res) {
+                        setcontacts([res.data.contactlist])
+                    }
+                })
+                .catch(err => console.log(err))
+        } else {
+            // getContacts()
+            // .then(res => {
+            //     console.log(res.data.data);
+            //     setcontacts(res.data.data);
+            //     //setperpage(res.slice(0,10))
+            //     //console.log(perpage);
+            //     // setcontacts(res)..
+            // })
+            // .catch(err => console.log(err));
 
-        //     }
-        //     let result=await axios.get(`https://jsonplaceholder.typicode.com/posts/${key}`)
-        //     .then(res=>{
-        //         console.log(res.data)
-
-
-        //     })
-        //     .catch(err=>console.log(err));
-
-        try {
-            let key = event.target.value
-            if (key) {
-                let res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${key}`)
-                res = await res.data
-                console.log(res);
-                if (res) {
-                    setcontacts(res)
-                }
-            }
-            else{
-                getcontacts()
-            }
-
-
-        } catch (err) {
-            console.log(err)
-        };
+        }
 
     }
+
     return (
         <div className="nav-bar">
             <div className="navtext">
@@ -43,16 +42,13 @@ const NavBar = ({ getcontacts, setcontacts }) => {
             </div>
             <div className="search-container">
                 <i className="fa fa-search icon"></i>
-                <input className="input-field"  placeholder="Search..." type="text" onChange={searchHandle} />
-
+                <input className="input-field" placeholder="Search..." type="text" onBlur={searchHandle} />
             </div>
             <div className="profile">
                 <div>
                     <img className="profile-img" src={prof} />
                 </div>
-
                 <div>
-                
                     <div>name</div>
                     <div>Super Admin</div>
                 </div>

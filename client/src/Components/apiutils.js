@@ -17,25 +17,41 @@ export const postContacts = async (contactArr) => {
 } 
 
 // export async function deleteContact(id) {
-//     await fetch('/v1/contacts/' + id, {
+//     const res = await fetch('/v1/contacts/' + id, {
 //         method: "DELETE",
+//         headers: {
+//             "Authorization": localStorage.getItem('token')
+//         }
 //     })
-//         .then(res => console.log(res))
-//         .catch((e) => console.log(e));
+
+//     return res.json();
+//         // .then(res => console.log(res))
+//         // .catch((e) => console.log(e));
 // }
 
 export async function deleteContacts(arrayOfContactsId) {
-    await fetch('/v1/contacts', {
+    const res = await fetch('http://localhost:5000/v1/contacts', {
         method: "DELETE",
-        body: arrayOfContactsId
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem('token')
+        },
+        body: JSON.stringify(arrayOfContactsId)
     })
-        .then(res => console.log(res))
-        .catch((e) => console.log(e));
+
+    return res.json();
+        // .then(res => console.log(res))
+        // .catch((e) => console.log(e));
 }
 
-// export async function getContacts(setContactList) {
-//     await fetch('/v1/contacts', {
-//         method: "GET"
+// export async function getContacts() {
+//     let key = 
+//     const res = await axios.get('http://localhost:5000/v1/contacts' , {
+//         method: "GET",
+//         {headers: 
+//             {'Authorization': localStorage.getItem('token')}
+//         })
 //     })
 //         .then(res => res.json())
 //         .then(res => {
@@ -56,4 +72,12 @@ export const getContacts = async () => {
     } catch (e) {
         console.log(e)
     };
+}
+
+export const searchContact = async (key) => {
+    const res = await axios.get(`http://localhost:5000/v1/contacts/${key}`, 
+            {headers: 
+                {'Authorization': localStorage.getItem('token')}
+            })
+            return res
 }

@@ -22,13 +22,20 @@ const SignIn = () => {
             .post(loginUrl, loginData)
             .then((res) => {
                 console.log(res);
-                navigate("/contact")
-                const token = res.data.token;
+                if(res.status === 200) {
+                    navigate("/contact")
+                    const token = res.data.token;
+                    localStorage.setItem("token", token)
+                    setUserEmail(loginData.email);
+                } else {
+                    alert("User does not Exist");
+                }
+               
                 // console.log('from SignIn component token:', token)
-                localStorage.setItem("token", token)
+                
                 // localStorage.setItem("email", loginData.email);
                 // document.location.reload();
-                setUserEmail(loginData.email);
+                
 
             }).catch((err) => {
                 console.log(err)
