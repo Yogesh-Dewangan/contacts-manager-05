@@ -1,36 +1,28 @@
 import axios from "axios";
 
-export async function postContacts(contactArr, setImportTrigger, setImportCompleteTrigger) {
-    console.log('in postContact', contactArr);
-    await fetch('http://localhost:5000/v1/contacts', {
+// , setImportTrigger, setImportCompleteTrigger
+export const postContacts = async (contactArr) => {
+    // console.log('in postContact', newData);
+    const res = await fetch('http://localhost:5000/v1/contacts', {
         method: "POST",
         headers: {
-            // "Accept": "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
             "Authorization": localStorage.getItem('token')
         },
-        body:JSON.stringify(contactArr)
+        body: JSON.stringify(contactArr)
     })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res)
-            setImportTrigger(false);
-            setImportCompleteTrigger(true);
-            setTimeout(() => {
-                setImportCompleteTrigger(false)
-            }, 2000);
-            
-        })
-        .catch((e) => console.log(e));
+
+    return res.json();
 } 
 
-export async function deleteContact(id) {
-    await fetch('/v1/contacts/' + id, {
-        method: "DELETE",
-    })
-        .then(res => console.log(res))
-        .catch((e) => console.log(e));
-}
+// export async function deleteContact(id) {
+//     await fetch('/v1/contacts/' + id, {
+//         method: "DELETE",
+//     })
+//         .then(res => console.log(res))
+//         .catch((e) => console.log(e));
+// }
 
 export async function deleteContacts(arrayOfContactsId) {
     await fetch('/v1/contacts', {
@@ -54,12 +46,14 @@ export async function deleteContacts(arrayOfContactsId) {
 
 export const getContacts = async () => {
     try {
-        await axios.get(
-            'https://localhost:5000/v1/contact', 
+        const res = await axios.get(
+            'http://localhost:5000/v1/contacts', 
             {headers: 
                 {'Authorization': localStorage.getItem('token')}
             })
-    } catch (err) {
-        console.log(err)
+
+        return res
+    } catch (e) {
+        console.log(e)
     };
 }
