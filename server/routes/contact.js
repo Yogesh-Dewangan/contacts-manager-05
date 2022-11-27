@@ -1,27 +1,31 @@
 const express = require("express")
-let Contacts = require("../models/Contacts")
+const Contacts = require("../models/Contacts")
+const User = require('../models/Users')
 const router = express.Router()
+const bodyParser = require('body-parser');
+
+router.use(bodyParser.json());
 
 router.post("/", async (req, res) => {
     try {
         const newData = req.body;
-        // const contactlist = [];
-        // newData.forEach(async list => {
-        //     contactlist.push(await Contacts.create({
-        //         name: list.name,
-        //         designation: list.designation,
-        //         company: list.company,
-        //         industry: list.industry,
-        //         email:list.email,
-        //         phoneNumber: list.phoneNumber,
-        //         country: list.country
-        //     })
-        //     )
-        // })
-        console.log('newData', newData)
+        console.log(newData);
+        const contactlist = [];
+        newData.forEach(async list => {
+            contactlist.push(await Contacts.create({
+                name: list.name,
+                designation: list.designation,
+                company: list.company,
+                industry: list.industry,
+                email:list.email,
+                phoneNumber: list.phoneNumber,
+                country: list.country
+            })
+            )
+        })
         res.status(200).json({
-            status: "success"
-            // data: contactlist
+            status: "success",
+            data: contactlist
         })
 
     } catch (e) {
@@ -36,7 +40,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async(req, res) => {
     try {
-        const contactlist = await Contacts.find();
+        // const pageNo = req.query.page;
+        const contactlist = await Contacts.find() //.skip(pageNo - 1).limit(10);
         res.status(200).json({
             status: "success",
             data: contactlist
