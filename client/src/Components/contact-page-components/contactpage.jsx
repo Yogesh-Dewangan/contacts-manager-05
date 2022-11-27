@@ -7,11 +7,14 @@ import Pagination from "./pagination"
 import { number } from "prop-types"
 import deleted from "./images/im/delete.png"
 import edited from "./images/edit.png";
+import { getContacts } from "../apiutils"
 
 const Contacts = () => {
 
     const [deleteTrigger, setDeleteTrigger] = useState(false);
     const [selection, setselectionarr] = useState([])
+    // const [arrayOfContactsId, setArrayOfContactsId] = useState([]);
+
     var data = [
 
         {
@@ -100,7 +103,6 @@ const allDElete=async()=>{
                                 onChange={(e) => {
                                     handlecheckbox(e)
                                 }} /></td>
-
                             <td className="td">{contact.name}</td>
                             <td className="td">{contact.designation}</td>
                             <td className="td">{contact.company}</td>
@@ -149,21 +151,17 @@ const allDElete=async()=>{
     })
 
     useEffect(() => {
-        getcontacts()
+        getContacts()
+            .then(res => {
+                //setcontacts(res)
+                //setperpage(res.slice(0,10))
+                //console.log(perpage);
+                // setcontacts(res)..
+            })
+            .catch(err => console.log(err));
 
     }, [])
-    const getcontacts = async () => {
-        try {
-            let res = await axios.get('https://jsonplaceholder.typicode.com/posts')
-            res = await res.data
-            //setcontacts(res)
-            //setperpage(res.slice(0,10))
-            //console.log(perpage);
-            // setcontacts(res)..
-        } catch (err) {
-            console.log(err)
-        };
-    }
+    
     // const pageHandler=(pagenumber)=>{
     //     setperpage(currentItems)
     // }
@@ -201,7 +199,7 @@ const allDElete=async()=>{
     return (
         <div className="main">
             <div>
-                <NavBar getproducts={getcontacts} setcontacts={setcontacts} />
+                <NavBar getproducts={getContacts} setcontacts={setcontacts} />
             </div>
             <div className="contacts">
                 <div className="btn-container">

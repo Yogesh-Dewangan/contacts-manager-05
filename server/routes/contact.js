@@ -1,29 +1,32 @@
-
 const express = require("express")
-let contacts = require("../models/Contacts")
+let Contacts = require("../models/Contacts")
 const router = express.Router()
 
 router.post("/", async (req, res) => {
     try {
-        // const contactlist = await contacts.create({
-        //     name: req.body.name ,
-        //     designation: req.body.designation ,
-        //     company: req.body.company ,
-        //     industry: req.body.industry  ,
-        //     email:req.body.email  ,
-        //     phoneNumber: req.body.phoneNumber  ,
-        //     country: req.body.country
+        const newData = req.body;
+        // const contactlist = [];
+        // newData.forEach(async list => {
+        //     contactlist.push(await Contacts.create({
+        //         name: list.name,
+        //         designation: list.designation,
+        //         company: list.company,
+        //         industry: list.industry,
+        //         email:list.email,
+        //         phoneNumber: list.phoneNumber,
+        //         country: list.country
+        //     })
+        //     )
         // })
-        console.log(req.body)
+        console.log('newData', newData)
         res.status(200).json({
-
             status: "success"
             // data: contactlist
         })
 
     } catch (e) {
         res.status(400).json({
-            status: "Failed to post contacts",
+            status: "Failed to post Contacts",
             message: e.message
 
         })
@@ -31,26 +34,26 @@ router.post("/", async (req, res) => {
 })
 
 
-router.get("/",async  (req, res) => {
+router.get("/", async(req, res) => {
     try {
-        const contactlist = await contacts.find()
+        const contactlist = await Contacts.find();
         res.status(200).json({
-
             status: "success",
             data: contactlist
         })
 
     } catch (e) {
         res.status(400).json({
-            status: "Failed to get contacts",
+            status: "Failed to get Contacts",
             message: e.message
 
         })
     }
 })
+
 router.get("/:key", async (req, res) => {
     try {
-        let contactlist = await contacts.findOne({
+        let contactlist = await Contacts.findOne({
             "$or": [
                 {
                     email: { $regex: req.params.key }
@@ -58,6 +61,7 @@ router.get("/:key", async (req, res) => {
             ]
         })
         res.status(200).json({
+            status: "Success",
             contactlist
         })
     }
@@ -69,26 +73,36 @@ router.get("/:key", async (req, res) => {
         })
     }
 })
-router.delete("/:arr", async (req, res) => {
+
+router.delete("/", async (req, res) => {
     try{
-        let arr=req.params.arr
-        for(let i=0;i<arr.length;i++){
-            const del=await contacts.deleteOne({_id:arr[i]})
-        }
-        
-    }catch(e){
-        console.log(e)
+        const ids = req.body;
+        ids.forEach(async id => {
+            await Contacts.deleteOne({_id:id})
+        })
+        res.status(200).json({
+            status: "Success"
+        })
+        // for(let i=0;i<arr.length;i++){
+        //     const del=await Contacts.deleteOne({_id:arr[i]})
+        // }    
+    } catch(e){
+        res.status(400).json({
+            status: "Failed",
+            message: e.message
+        })
     }
 })
-router.delete("/:id", async (req, res) => {
-    try{
-        let arr=req.params.id
-        const del=await contacts.deleteOne({_id})
+
+// router.delete("/:id", async (req, res) => {
+//     try{
+//         let arr=req.params.id
+//         const del=await Contacts.deleteOne({_id})
 
         
-    }catch(err){
-        console.log(err)
-    }
-})
+//     }catch(err){
+//         console.log(err)
+//     }
+// })
 
 module.exports = router
