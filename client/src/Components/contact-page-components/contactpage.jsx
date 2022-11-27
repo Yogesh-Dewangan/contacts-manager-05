@@ -51,15 +51,29 @@ const Contacts = () => {
 
     const [ischecked, setischecked] = useState([])
     const [seletallpage,setselectedallpage]=useState([])
-    const [contacts, setcontacts] = useState(data)
+    const [contacts, setcontacts] = useState([])
     //const [perpage,setperpage]=useState([])
     const [currentpage, setcurrentpage] = useState(1)//1,2,3
-    const [itemperpage, setitemperpage] = useState(1)//how many items per page
+    const [itemperpage, setitemperpage] = useState(5)//how many items per page
+    const [currentItems, setCurrentItems] = useState([]);
 
 
     const [pagenumberlimit, setpagenumberlimit] = useState(5)
     const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(1)//
     const [minpagenumberlimit, setminpagenumberlimit] = useState(0)
+
+    useEffect(() => {
+        getContacts()
+            .then(res => {
+                console.log(res.data.data);
+                setcontacts(res.data.data);
+                //setperpage(res.slice(0,10))
+                //console.log(perpage);
+                // setcontacts(res)..
+            })
+            .catch(err => console.log(err));
+
+    }, [])
 
 const handlecheckbox=(e)=>{
     const {value,checked}=e.target
@@ -87,13 +101,13 @@ const allDElete=async()=>{
     const pages = []
     for (let i = 1; i < Math.ceil(contacts.length / itemperpage); i++) {
         pages.push(i)
-
     }
+
     const renderconts = (conts) => {
         return (
 
             <>{
-                conts.map((contact, index) => {
+                contacts.map((contact, index) => {
                     let len = contacts.length
                     let val = index
                     return (
@@ -133,7 +147,11 @@ const allDElete=async()=>{
 
     const indexoflatitem = currentpage * itemperpage;
     const indexoffirstitem = indexoflatitem - itemperpage;
-    const currentItems = contacts.slice(indexoffirstitem, indexoflatitem)
+    // const currentItem = contacts.slice(indexoffirstitem, indexoflatitem)
+
+    useEffect(() => {
+        setCurrentItems(contacts.slice(indexoffirstitem, indexoflatitem))
+    }, [contacts])
 
     const renderpagenumbers = pages.map(pgnumber => {
         if (pgnumber < maxpagenumberlimit + 1 && pgnumber > minpagenumberlimit) {
@@ -149,18 +167,6 @@ const allDElete=async()=>{
         }
 
     })
-
-    useEffect(() => {
-        getContacts()
-            .then(res => {
-                //setcontacts(res)
-                //setperpage(res.slice(0,10))
-                //console.log(perpage);
-                // setcontacts(res)..
-            })
-            .catch(err => console.log(err));
-
-    }, [])
     
     // const pageHandler=(pagenumber)=>{
     //     setperpage(currentItems)
@@ -188,14 +194,6 @@ const allDElete=async()=>{
         pageDecrementbtn = <li onclick={handleprev}>&hellip;</li>
     }
 
-
-
-
-
-
-
-
-
     return (
         <div className="main">
             <div>
@@ -214,7 +212,7 @@ const allDElete=async()=>{
                         setselectedallpage={setselectedallpage}
                         handlecheckbox={handlecheckbox}
                         ischecked={ischecked}
-                         currentItems={currentItems}/>
+                        currentItems={currentItems}/>
                     </thead>
                     <tbody>
                         {
