@@ -8,35 +8,7 @@ import DragNDrop from '../DragNDrop';
 import { DeleteConfirmationPopup, DeletedPopup } from '../deletePopups';
 
 import { Link } from "react-router-dom";
-export function CardContact({ contact, setDeleteTrigger }) {
 
-
-    // console.log(contact)
-    return (
-        <tr>
-
-            <td> <input type="checkbox" /></td>
-            <td className="td">{contact.name}</td>
-            <td className="td">{contact.designation}</td>
-            <td className="td">{contact.company}</td>
-            <td className="td">{contact.industry}</td>
-            <td className="td">
-                <div className="tooltip">
-                    {contact.email}
-                    <span className="tooltiptext"> {contact.email}</span>
-                </div>
-
-            </td>
-            <td className="td">{contact.phoneNumber}</td>
-            <td className="td">{contact.country}</td>
-            <td className="td" style={{ display: "flex", flexDirection: "row" }}>
-                <button onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg" /></button>
-                <button><img src={edited} alt="editImg" /></button>
-            </td>
-        </tr>
-    )
-
-}
 export function Cardheaders() {
     return (
         <tr>
