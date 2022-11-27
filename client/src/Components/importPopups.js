@@ -8,7 +8,8 @@ import completedImg from './images/completedImg.svg'
 export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteTrigger}) {
     
     const [highlighted, setHighlighted] = useState(false);
-    const [contactsN, setContactsN] = useState("");
+    // const [newData, setNewData] = useState([]);
+    let contactArr = [];
 
     const dragHandler = (e) => {
         e.preventDefault();
@@ -17,29 +18,34 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
     const dropHandler = (e) => {
         e.preventDefault();
         setHighlighted(false);
-        setContactsN([]);
+        // setContactsN([]);
+        contactArr = [];
         // console.log(e.dataTransfer.files);
         Array.from(e.dataTransfer.files)
             .filter(file => file.type === "text/csv")
             .forEach( async (file) => {
-                let text = await file.text();
-                // console.log('text', text);
-                let result = parse(text, {header: true})
-                // console.log('result.data', result.data);
-               
-                setTimeout(() => {
-                    setContactsN((contactsN) => ({
-                        ...contactsN,
-                        ...result.data
-                    }))
-                }, 0);
+                let text = await file.text()
+                console.log('text', text);
+                    let result = parse(text, {header: true})
+                    console.log('result.data', result.data);
+                    // setNewData([{name: "vijay", age: 20}, {name: "vinay", age: 22}]);
+                    contactArr.push(...result.data)
+                    // console.log('contacts', contactArr);
             })
-
-            // console.log('newContacts', newContacts);
             
             setTimeout(() => {
-                console.log('contacts', contactsN);
-                postContacts(contactsN, setImportTrigger, setImportCompleteTrigger)
+                console.log('contacts', contactArr);
+                postContacts(contactArr) //, setImportTrigger, setImportCompleteTrigger
+                .then(res => {
+                    console.log(res)
+                    setImportTrigger(false);
+                    setImportCompleteTrigger(true);
+                    setTimeout(() => {
+                        setImportCompleteTrigger(false)
+                    }, 2000);
+                    
+                })
+                .catch((e) => console.log(e));
             }, 10);
         
     }
