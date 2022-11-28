@@ -1,7 +1,7 @@
 import axios from "axios"
 import prof from "./images/prof.png"
 import React, { useState } from "react"
-// import { getContacts } from "../apiutils"
+import { getContacts } from "../apiutils"
 
 const NavBar = ({ setcontacts }) => {
     const localName = localStorage.getItem('userEmail').split('@')[0]
@@ -17,27 +17,27 @@ const NavBar = ({ setcontacts }) => {
                         { 'Authorization': localStorage.getItem('token') }
                 })
                 .then(res => {
-                    console.log(res.data.contactlist);
-                    if (res) {
-                        setcontacts([res.data.contactlist])
+                    console.log(res.data.contactlistSearchkey);
+                    if (res.data.contactlistSearchkey) {
+                        setcontacts([res.data.contactlistSearchkey])
+                    }
+                    else{
+                        setcontacts([])
                     }
                 })
                 .catch(err => console.log(err))
         } else {
-            // getContacts()
-            // .then(res => {
-            //     console.log(res.data.data);
-            //     setcontacts(res.data.data);
-            //     //setperpage(res.slice(0,10))
-            //     //console.log(perpage);
-            //     // setcontacts(res)..
-            // })
-            // .catch(err => console.log(err));
+            getContacts()
+            .then(res => {
+                console.log(res.data.data);
+                setcontacts(res.data.data);
+                
+            })
+            .catch(err => console.log(err));
 
         }
 
     }
-
     return (
         <div className="nav-bar">
             <div className="navtext">
@@ -45,14 +45,14 @@ const NavBar = ({ setcontacts }) => {
             </div>
             <div className="search-container">
                 <i className="fa fa-search icon"></i>
-                <input className="input-field" placeholder="Search..." type="text" onBlur={searchHandle} />
+                <input className="input-field" placeholder="Search..." type="text" onChange={searchHandle} />
             </div>
             <div className="profile">
                 <div>
                     <img className="profile-img" src={prof} />
                 </div>
                 <div>
-                    <div>{`Welcom ${name}`}</div>
+                    <div>{`Welcome ${name}`}</div>
                     <div>{email}</div>
                 </div>
             </div>
