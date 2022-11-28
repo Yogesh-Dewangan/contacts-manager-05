@@ -29,7 +29,7 @@ const Contacts = () => {
     useEffect(() => {
         getContacts()
             .then(res => {
-                console.log(res.data.data);
+                // console.log(res.data.data);
                 setcontacts(res.data.data);
                 //setperpage(res.slice(0,10))
                 //console.log(perpage);

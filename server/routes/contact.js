@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
                 country: list.country,
                 userRef: req.user
             })
-            console.log('contact from post', contact);
+            // console.log('contact from post', contact);
             contactlist.push(contact)
         })
         res.status(200).json({
@@ -53,7 +53,6 @@ router.get("/", async(req, res) => {
         res.status(400).json({
             status: "Failed to get Contacts",
             message: e.message
-
         })
     }
 })
@@ -83,7 +82,7 @@ router.get("/:key", async (req, res) => {
 router.delete("/", async (req, res) => {
     try{
         const ids = req.body;
-        console.log(ids);
+        // console.log(ids);
         ids.forEach(async id => {
             await Contacts.deleteOne({_id: id})  //({$and: {_id:id, userRef: req.user}}) 
         })

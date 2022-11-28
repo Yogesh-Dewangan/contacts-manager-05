@@ -22,27 +22,22 @@ const SignIn = () => {
             .post(loginUrl, loginData)
             .then((res) => {
                 console.log(res);
-                if(res.status === 200) {
+                if (res.status === 200) {
                     navigate("/contact")
                     const token = res.data.token;
                     localStorage.setItem("token", token)
                     setUserEmail(loginData.email);
+                    localStorage.setItem("userEmail", login.email)
                 } else {
                     alert("User does not Exist");
                 }
-               
-                // console.log('from SignIn component token:', token)
-                
-                // localStorage.setItem("email", loginData.email);
-                // document.location.reload();
-                
 
             }).catch((err) => {
                 console.log(err)
                 alert("Invalid Credentials . Try Again")
             })
     }
-    
+
     const submitHandler = (e) => {
         e.preventDefault();
         loginUser(login);

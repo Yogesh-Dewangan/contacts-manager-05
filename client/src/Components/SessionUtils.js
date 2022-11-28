@@ -4,21 +4,11 @@ import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 
 export default function UseSession({children}) {
-    const [verify, setVerify] = useState(true);
     // const navigate = useNavigate();
+    const [verify, setVerify] = useState(true);
 
-    
-    const verification = () => {
-        setVerify(true)
-    }
-
-    useEffect(() => {
-        console.log('inside useeffect', verify);
-    }, [verify])
-
-    // const userDetails = () => {
         const sessionId = localStorage.getItem('token');
-        console.log(sessionId);
+        // console.log(sessionId);
 
         new Promise ((resolve, reject) => {
             if(!sessionId) {
@@ -28,11 +18,8 @@ export default function UseSession({children}) {
                 .then(res => res.json())
                 .then(data => {
                     if(data) {
-                        console.log('from session-utils', data);
-                //         setVerify(true);
-                // console.log('verify1', verify);
+                        setVerify(() => true)
                         resolve(data);
-                        return;
                     }
                     reject(new Error("User not Signed In"))
                 })
@@ -42,11 +29,13 @@ export default function UseSession({children}) {
 
         })
             .then(data => {
-                // setVerify(true);
-                verification();
-                console.log('verify', verify);
+                console.log(data);
+                setVerify(() => true)
+                // console.log('from session-utils', data);
             })
-            .catch(e => console.log(e));
+            .catch(e => {
+                console.log(e);
+            });
 
     return verify ? children : <Navigate to="/"/>;
 

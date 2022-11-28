@@ -1,3 +1,4 @@
+/*
 import React, { useState, useContext, createContext } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
@@ -73,5 +74,4 @@ export function APIContextProvider({ children }) {
 // }
 
 export const context = () => useContext(APIContext);
-
-
+*/
