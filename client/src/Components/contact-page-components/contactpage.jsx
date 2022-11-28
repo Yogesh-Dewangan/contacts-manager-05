@@ -19,10 +19,10 @@ const Contacts = () => {
     //-----------------------------------pagination-----------
     const [contacts, setcontacts] = useState([])
     const [currentpage, setcurrentpage] = useState(1)//1,2,3
-    const [itemperpage, setitemperpage] = useState(5)//how many items per page  //const [currentItems, setCurrentItems] = useState([]);
+    const [itemperpage, setitemperpage] = useState(10)//how many items per page  //const [currentItems, setCurrentItems] = useState([]);
 
-    const [pagenumberlimit, setpagenumberlimit] = useState(5)
-    const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(1)//
+    const [pagenumberlimit, setpagenumberlimit] = useState(2)
+    const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(2)//
     const [minpagenumberlimit, setminpagenumberlimit] = useState(0)
 
 
@@ -157,7 +157,7 @@ const Contacts = () => {
     return (
         <div className="main">
             <div className="nav">
-                <NavBar getproducts={getContacts} />
+            <NavBar  setcontacts={setcontacts}/>
             </div>
             <div className="contacts">
                 <div className="btn-container">
@@ -190,7 +190,7 @@ const Contacts = () => {
                     {renderpagenumbers}
                     {pageIncrementbtn}
                     <li>
-                        <button onClick={handlenext} disabled={currentpage == pages[pages.length] ? true : false}>next</button>
+                        <button onClick={handlenext} disabled={currentpage == pages[pages.length-1] ? true : false}>next</button>
 
                     </li>
 

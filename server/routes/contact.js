@@ -60,14 +60,16 @@ router.get("/", async(req, res) => {
 // { $regex: req.params.key }
 router.get("/:key", async (req, res) => {
     try {
-        let contactlist = await Contacts.findOne({
-            $and: [
-                {email: req.params.key }, {userRef: req.user}
-            ]
-        })
+        // let contactlist = await Contacts.findOne({
+        //     $and: [
+        //         {email: req.params.key }, {userRef: req.user}
+        //     ]
+        // })
+        let contactlistSearchkey = await Contacts.findOne({email:{ $regex: req.params.key } })
+
         res.status(200).json({
             status: "Success",
-            contactlist
+            contactlistSearchkey
         })
     }
     catch (e) {
