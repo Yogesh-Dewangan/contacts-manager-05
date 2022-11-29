@@ -4,10 +4,15 @@ import React, { useState } from "react"
 import { getContacts } from "../apiutils"
 
 const NavBar = ({ setcontacts }) => {
-    const localName = localStorage.getItem('userEmail').split('@')[0]
+   
     const localEmail = localStorage.getItem('userEmail')
-    const [name, setName] = useState(localName)
-    const [email, setEmail] = useState(localEmail)
+    let localName = "User";
+    if(localEmail) {
+        localName = `Welcome ${localStorage.getItem('userEmail').split('@')[0]}`
+    }
+    const [name] = useState(localName)
+    const [email] = useState(localEmail)
+
     const searchHandle = async (e) => {
         let key = e.target.value
         if (key) {
@@ -29,8 +34,8 @@ const NavBar = ({ setcontacts }) => {
         } else {
             getContacts()
             .then(res => {
-                console.log(res.data.data);
-                setcontacts(res.data.data);
+                // console.log(res.data);
+                setcontacts(res.data);
                 
             })
             .catch(err => console.log(err));
@@ -49,10 +54,10 @@ const NavBar = ({ setcontacts }) => {
             </div>
             <div className="profile">
                 <div>
-                    <img className="profile-img" src={prof} />
+                    <img className="profile-img" src={prof} alt='profileImg'/>
                 </div>
                 <div>
-                    <div>{`Welcome ${name}`}</div>
+                    <div>{name}</div>
                     <div>{email}</div>
                 </div>
             </div>
