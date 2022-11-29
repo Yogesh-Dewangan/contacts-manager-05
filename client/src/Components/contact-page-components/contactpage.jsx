@@ -1,10 +1,7 @@
 import React, { useState } from "react"
 import { useEffect } from "react"
-import axios from "axios"
-import { Buttons, CardContact, Cardheaders } from "./card"
+import { Buttons, Cardheaders } from "./card"
 import NavBar from "./navbar"
-import Pagination from "./pagination"
-import { number } from "prop-types"
 import deleted from "./images/im/delete.png"
 import edited from "./images/edit.png";
 import { getContacts } from "../apiutils"
@@ -12,15 +9,12 @@ import { getContacts } from "../apiutils"
 const Contacts = () => {
 
     const [deleteTrigger, setDeleteTrigger] = useState(false);
-    const [selection, setselectionarr] = useState([])
-    // const [arrayOfContactsId, setArrayOfContactsId] = useState([]);
     const [ischecked, setischecked] = useState([])
 
     //-----------------------------------pagination-----------
     const [contacts, setcontacts] = useState([])
     const [currentpage, setcurrentpage] = useState(1)//1,2,3
-    const [itemperpage, setitemperpage] = useState(10)//how many items per page  //const [currentItems, setCurrentItems] = useState([]);
-
+    const [itemperpage, setitemperpage] = useState(10)//how many items per page
     const [pagenumberlimit, setpagenumberlimit] = useState(2)
     const [maxpagenumberlimit, setmaxpagenumberlimit] = useState(2)//
     const [minpagenumberlimit, setminpagenumberlimit] = useState(0)
@@ -29,24 +23,26 @@ const Contacts = () => {
     useEffect(() => {
         getContacts()
             .then(res => {
-                // console.log(res.data.data);
-                setcontacts(res.data.data);
-                //setperpage(res.slice(0,10))
-                //console.log(perpage);
-                // setcontacts(res)..
+                // console.log(res.data);
+                setcontacts(res.data);
             })
             .catch(err => console.log(err));
 
     }, [])
 
     const pages = []
-    for (let i = 1; i < Math.ceil(contacts.length / itemperpage); i++) {
-        pages.push(i)
-    }
-
+    let currentItem;
     const indexoflatitem = currentpage * itemperpage;
     const indexoffirstitem = indexoflatitem - itemperpage;
-    const currentItem = contacts.slice(indexoffirstitem, indexoflatitem)
+    if(contacts) {
+        for (let i = 1; i < Math.ceil(contacts.length / itemperpage); i++) {
+            pages.push(i)
+        }
+        currentItem = contacts.slice(indexoffirstitem, indexoflatitem)
+    }
+
+   
+    
 
     const handlenext = () => {
         setcurrentpage(currentpage + 1)
@@ -57,7 +53,7 @@ const Contacts = () => {
     }
     const handleprev = () => {
         setcurrentpage(currentpage - 1)
-        if ((currentpage - 1) % pagenumberlimit == 0) {
+        if ((currentpage - 1) % pagenumberlimit === 0) {
             setmaxpagenumberlimit(maxpagenumberlimit - pagenumberlimit)
             setminpagenumberlimit(minpagenumberlimit - pagenumberlimit)
         }
@@ -73,7 +69,7 @@ const Contacts = () => {
 
     const handlecheckbox = (e) => {
         const { value, checked } = e.target
-        if (value == 'all') {
+        if (value === 'all') {
             currentItem.map((contact) => {
                 contact.checked = true
             })
@@ -91,11 +87,8 @@ const Contacts = () => {
 
     }
 
-    // let deleteThisContact = '';
     const allDElete = (e) => {
         setDeleteTrigger(true);
-        // deleteThisContact = e.target.id
-        // console.log(e.currentTarget.id)
         setischecked([e.currentTarget.id]);
     }
 
@@ -106,7 +99,7 @@ const Contacts = () => {
 
     const renderconts = (conts) => {
         return (<>
-        { contacts.map((contact, index) => {
+        {(contacts) ? contacts.map((contact, index) => {
             let len = contacts.length
             let val = index
             return (
@@ -137,7 +130,7 @@ const Contacts = () => {
                     </td>
                 </tr>
             )
-        })} </>)
+        }) : "" } </>)
     }
     // onClick={() => setDeleteTrigger(true)}
 
@@ -161,7 +154,7 @@ const Contacts = () => {
             </div>
             <div className="contacts">
                 <div className="btn-container">
-                    <Buttons isChecked={ischecked} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} />
+                    <Buttons isChecked={ischecked} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} setcontacts={setcontacts}/>
                 </div>
                 <table>
                     <thead>
