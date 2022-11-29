@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const process = require('process');
 const cors = require('cors');
+const path = require('path');
 
 const PORT = process.env.PORT || 5000;
 const secret = process.env.SECRET;
@@ -51,5 +52,9 @@ app.use('/v1/signup', registerRoute);
 app.use('/v1/signin', signInRoute);
 app.use('/v1/user', userRoute);
 app.use('/v1/contacts', contactRoute);
+
+if (process.env.NODE_ENV == "production") {
+    app.use(express.static(path.join(__dirname + '/public')));
+}
 
 app.listen(PORT, () => console.log(`Server is up at ${PORT} port`))
