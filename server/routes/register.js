@@ -25,6 +25,7 @@ router.post("/",
 
             if(password != confirm_password) {
                 return res.status(400).json({
+                    status: "Failed",
                     message:"Passwords do not match."
                 })
             }
@@ -57,7 +58,7 @@ router.post("/",
             } catch(e){
                 res.status(500).json({
                     status:"failed",
-                    message:e.message
+                    message: e.message
 
                 })
             
