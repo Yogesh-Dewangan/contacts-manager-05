@@ -1,77 +1,34 @@
-/*
-import React, { useState, useContext, createContext } from 'react'
-import axios from "axios"
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import UseSession from "./apiutils";
 
+const UserSessionContext = React.createContext();
 
-const APIContext = React.createContext();
+export function UserSessionContextProvider({children}) {
 
-export function APIContextProvider({ children }) {
+    const [userData, setUserData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const URL = "/"
-    // const navigate = useNavigate();
-    const signUpUrl = `${URL}/signup`;
-    const loginUrl = `${URL}/signin`
-    const [userEmail, setUserEmail] = useState("");
-
-    const config = {
-        headers: {
-            token: localStorage.getItem("token"),
-        },
-    };
-
-    const signUpUser = (userData) => {
-        try {
-            axios
-                .post(signUpUrl, userData)
-                .then((res) => {
-                    console.log(res)
-                    // navigate("/")
-                }).catch((err) => {
-                    console.log(err);
-                    alert("Failed Registration");
-                })
-        }
-
-        catch (error) {
-            alert(error.message);
-        }
-    }
-
-    const loginUser = (loginData) => {
-        axios
-            .post(loginUrl, loginData)
-            .then((res) => {
-                const token = res.data.token;
-                localStorage.setItem("token", token)
-                localStorage.setItem("email", loginData.email);
-                // navigate("/mainContactsPage")
-                // document.location.reload();
-                setUserEmail(loginData.email);
-
-            }).catch((err) => {
-                console.log(err)
-                alert("Invalid Credentials . Try Again")
+    useEffect(() => {
+        UseSession()
+            .then(res => {
+                // console.log('from userContext', res);
+                setIsLoading(true);
+                setUserData(res);
             })
+            .catch(err => {
+                setIsLoading(true);
+                console.log(err);
+            })
+    }, [])
 
-        return (
-            <APIContext.Provider
-                value={{
-                    signUpUser,
-                    loginUser,
-                    userEmail
-                }}
-            >
-
-                {children}
-            </APIContext.Provider>
-        )
-    }
+    return <UserSessionContext.Provider value={{
+        userData,
+        setUserData: (data) => {
+            setUserData(data)
+        }
+        }}>
+        {isLoading ? children : 'isLoading......'}
+    </UserSessionContext.Provider>
 }
-// export function useAPI() {
-//     const context = useContext(APIContext)
-//     return context
-// }
 
-export const context = () => useContext(APIContext);
-*/
+export const useSessionContext = () => useContext(UserSessionContext);
