@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SignIn.css"
 import { useNavigate } from 'react-router-dom'
-import { context, useAPI } from "./Context";
 import axios from "axios"
+import { SessionUtils } from "./SessionUtils";
+
 const SignUp = () => {
     const navigate = useNavigate();
     const [login, setLogin] = useState({
@@ -10,6 +11,12 @@ const SignUp = () => {
         password: "",
         confirm_password: "",
     });
+    const {ifSessionExist} = SessionUtils();
+
+    useEffect(() => {
+        ifSessionExist('/contact')
+    }, [])
+
     const handleChange = (e) => {
         setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }))
     };
@@ -17,20 +24,16 @@ const SignUp = () => {
     const URL = "http://localhost:5000/v1"
     const signUpUrl = `${URL}/signup`;
     const signUpUser = (userData) => {
-        try {
-            axios
-                .post(signUpUrl, userData)
+
+            axios.post(signUpUrl, userData)
                 .then((res) => {
-                    console.log(res)
+                    alert(res.data.message);
                     navigate("/")
-                }).catch((err) => {
-                    console.log(err);
-                    alert("Failed Registration");
                 })
-        }
-        catch (error) {
-            alert(error.message);
-        }
+                .catch((err) => {
+                    // console.log('err', err);
+                    alert(err.message);
+                })
     }
     //   const {signUpUser}= context(); //useAPI();
     const UserLogin = () => {

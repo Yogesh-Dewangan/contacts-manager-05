@@ -1,28 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { context } from './Context'
+import { useSessionContext } from './Context'
 import './SignIn.css'
 import axios from "axios"
+import { SessionUtils } from './SessionUtils'
 
 const SignIn = () => {
     const [login, setLogin] = useState({
         email: "",
         password: ""
     });
-
     const [userEmail, setUserEmail] = useState("");
+    const navigate = useNavigate();
+    const {setUserData} = useSessionContext();
+    const {ifSessionExist} = SessionUtils();
+
+    useEffect(() => {
+        ifSessionExist('/contact')
+    }, [])
 
     const URL = "http://localhost:5000/v1"
     const loginUrl = `${URL}/signin`
-
-    const navigate = useNavigate();
 
     const loginUser = async (loginData) => {
         await axios
             .post(loginUrl, loginData)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.status === 200) {
+                    setUserData(true)
                     navigate("/contact")
                     const token = res.data.token;
                     localStorage.setItem("token", token)
@@ -46,11 +52,6 @@ const SignIn = () => {
     const handleChange = (e) => {
         setLogin((curr) => ({ ...curr, [e.target.name]: e.target.value }));
     };
-    // const UserLogin = () => {
-    //     loginUser(login);
-    //     navigate("/contact")
-
-    // };
 
     return (
         <div className='login-page'>
