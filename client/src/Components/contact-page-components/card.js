@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import deleted from "./images/im/delete.png"
-import edited from "./images/edit.png";
 import importd from "./images/im/v1.png"
 import matte from "./images/im/matte.png"
 import filter from "./images/filter.png";
 import DragNDrop from '../DragNDrop';
 import { DeleteConfirmationPopup, DeletedPopup } from '../deletePopups';
-
-import { Link } from "react-router-dom";
 
 export function Cardheaders() {
     return (
@@ -50,7 +47,8 @@ export function Cardheaders() {
         </tr>
     )
 }
-export function Buttons({ deleteTrigger, setDeleteTrigger, isChecked }) {
+
+export function Buttons({ deleteTrigger, setDeleteTrigger, isChecked, setcontacts}) {
 
     const [importTrigger, setImportTrigger] = useState(false);
     const [deleteCompleteTrigger, setDeleteCompleteTrigger] = useState(false);
@@ -73,11 +71,11 @@ export function Buttons({ deleteTrigger, setDeleteTrigger, isChecked }) {
                         <img src={filter} alt="filterImg" />
                         Filter .
                     </button>
-                    <DragNDrop importTrigger={importTrigger} setImportTrigger={setImportTrigger} />
+                    <DragNDrop setcontacts={setcontacts} importTrigger={importTrigger} setImportTrigger={setImportTrigger} />
 
                     {(deleteTrigger) ? <DeleteConfirmationPopup isChecked={isChecked} setDeleteTrigger={setDeleteTrigger} setDeleteCompleteTrigger={setDeleteCompleteTrigger} /> : ""}
 
-                    {(deleteCompleteTrigger) ? <DeletedPopup /> : ""}
+                    {(deleteCompleteTrigger) ? <DeletedPopup setcontacts={setcontacts}/> : ""}
                     <button className="btn right">Export</button>
                     <button className="btn right" onClick={() => setImportTrigger(true)}><img src={importd} alt="importImg" /> <div>Import</div></button>
                     <button className="btn right" onClick={() => setDeleteTrigger(true)}><img src={deleted} alt="deleteImg" /><div>Delete</div> </button>
