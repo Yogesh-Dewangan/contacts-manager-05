@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PopUp from './PopUp';
 import {parse} from 'papaparse';
 import {getContacts, postContacts} from './apiutils';
@@ -28,9 +28,7 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
                 console.log('text', text);
                     let result = parse(text, {header: true})
                     console.log('result.data', result.data);
-                    // setNewData([{name: "vijay", age: 20}, {name: "vinay", age: 22}]);
                     contactArr.push(...result.data)
-                    // console.log('contacts', contactArr);
             })
             
             setTimeout(() => {
@@ -40,7 +38,7 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
                     console.log("added contacts",res)
                     setImportTrigger(false);
                     setImportCompleteTrigger(true);
-                    document.location.reload();
+                    // document.location.reload();
                     setTimeout(() => {
                         setImportCompleteTrigger(false)
                     }, 2000);
@@ -74,7 +72,15 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
     
 }
 
-export function ImportCompletePopup(importCompleteTrigger) {
+export function ImportCompletePopup({setcontacts}) {
+
+    useEffect(() => {
+        getContacts()
+            .then(res => {
+                setcontacts(res.data);
+            })
+    })
+
     return <PopUp>
         <div className='importcomplete'>
             <div className="img-container">

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PopUp from "./PopUp";
 import deleteImg from './images/deleteImg.svg'
 import completedImg from './images/completedImg.svg'
-import { deleteContacts } from "./apiutils";
+import { deleteContacts, getContacts } from "./apiutils";
 
-export function DeleteConfirmationPopup({setDeleteTrigger, setDeleteCompleteTrigger, arrayOfContactsId, isChecked}) {
+export function DeleteConfirmationPopup({setDeleteTrigger, setDeleteCompleteTrigger, isChecked}) {
 
     const okDeleteHandler = async () => {
         await deleteContacts(isChecked)
@@ -12,7 +12,7 @@ export function DeleteConfirmationPopup({setDeleteTrigger, setDeleteCompleteTrig
                 console.log(res);
                 setDeleteTrigger(false)
                 setDeleteCompleteTrigger(true);
-                document.location.reload();
+                // document.location.reload();
                 setTimeout(() => {
                     setDeleteCompleteTrigger(false);
                 }, 2000);
@@ -35,7 +35,15 @@ export function DeleteConfirmationPopup({setDeleteTrigger, setDeleteCompleteTrig
     </PopUp>
 }
 
-export function DeletedPopup() {
+export function DeletedPopup({setcontacts}) {
+
+    useEffect(() => {
+        getContacts()
+            .then(res => {
+                setcontacts(res.data);
+            })
+    })
+
     return <PopUp>
         <div className='deletecomplete'>
             <div className="img-container">
