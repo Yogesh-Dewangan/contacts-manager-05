@@ -5,11 +5,9 @@ const user=require("../models/Users")
 const jwt=require("jsonwebtoken")
 require("dotenv").config();
 const process = require('process');
-
 const secret = process.env.SECRET;
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
-
 let SESSIONID = '';
 
 router.post("/", async(req,res)=>{
@@ -59,9 +57,6 @@ router.post("/", async(req,res)=>{
 
 router.get('/get-current-user', (req, res) => {
     const sessionId = req.query.sessionId;
-    // console.log('from get-current-uesr sessionId:', sessionId);
-    // console.log('from get-current-uesr SESSIONID:', SESSIONID);
-    // console.log(sessionId === SESSIONID);
     if(sessionId === SESSIONID) {
         res.status(200).send(true);
     } else {
