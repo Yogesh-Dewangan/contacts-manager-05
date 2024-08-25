@@ -22,31 +22,51 @@ const SignIn = () => {
     const URL = "http://localhost:5000/v1"
     const loginUrl = `${URL}/signin`
 
-    const loginUser = async (loginData) => {
-        await axios
-            .post(loginUrl, loginData)
+    const loginUser = async () => {
+        // await axios.post(loginUrl, loginData)
+            await fetch(loginUrl, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login)
+            })
+            .then(res => res.json())
             .then((res) => {
                 // console.log(res);
-                if (res.status === 200) {
+                // if (res.status === 200) {
+                //     setUserData(true)
+                //     navigate("/contact")
+                //     const token = res.data.token;
+                //     localStorage.setItem("token", token)
+                //     setUserEmail(loginData.email);
+                //     localStorage.setItem("userEmail", login.email)
+                // } else {
+                //     alert("User does not Exist");
+                // }
+                if(res.status === 'Success') {
                     setUserData(true)
-                    navigate("/contact")
-                    const token = res.data.token;
-                    localStorage.setItem("token", token)
-                    setUserEmail(loginData.email);
-                    localStorage.setItem("userEmail", login.email)
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem("userEmail", login.email);
+                    alert(res.message);
+                    navigate('/contact');
                 } else {
-                    alert("User does not Exist");
+                    if(res.status === 'Failed') {
+                        alert(res.message);
+                    } else {
+                        alert(res.error);
+                    }
                 }
 
             }).catch((err) => {
                 console.log(err)
-                alert("Invalid Credentials . Try Again")
+                // alert("Invalid Credentials . Try Again")
             })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        loginUser(login);
+        loginUser();
     };
 
     const handleChange = (e) => {

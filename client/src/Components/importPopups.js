@@ -25,17 +25,17 @@ export function ImportPopup({importTrigger, setImportTrigger, setImportCompleteT
             .filter(file => file.type === "text/csv")
             .forEach( async (file) => {
                 let text = await file.text()
-                console.log('text', text);
+                // console.log('text', text);
                     let result = parse(text, {header: true})
-                    console.log('result.data', result.data);
+                    // console.log('result.data', result.data);
                     contactArr.push(...result.data)
             })
             
             setTimeout(() => {
-                console.log('contacts', contactArr);
+                // console.log('contacts', contactArr);
                 postContacts(contactArr) //, setImportTrigger, setImportCompleteTrigger
                 .then(res => {
-                    console.log("added contacts",res)
+                    // console.log("added contacts",res)
                     setImportTrigger(false);
                     setImportCompleteTrigger(true);
                     // document.location.reload();

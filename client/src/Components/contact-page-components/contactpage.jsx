@@ -34,15 +34,15 @@ const Contacts = () => {
     let currentItem;
     const indexoflatitem = currentpage * itemperpage;
     const indexoffirstitem = indexoflatitem - itemperpage;
-    if(contacts) {
+    if (contacts) {
         for (let i = 1; i < Math.ceil(contacts.length / itemperpage); i++) {
             pages.push(i)
         }
         currentItem = contacts.slice(indexoffirstitem, indexoflatitem)
     }
 
-   
-    
+
+
 
     const handlenext = () => {
         setcurrentpage(currentpage + 1)
@@ -75,7 +75,7 @@ const Contacts = () => {
             })
         }
         else {
-            console.log(value);
+            // console.log(value);
             if (checked) {
                 setischecked([...ischecked, value])
             }
@@ -99,38 +99,38 @@ const Contacts = () => {
 
     const renderconts = (conts) => {
         return (<>
-        {(contacts) ? contacts.map((contact, index) => {
-            let len = contacts.length
-            let val = index
-            return (
-                //individual  checkbox 
-                <tr key={index}>
-                    <td className="tdinp">
-                        <input type="checkbox" value={contact._id} checked={contact.ischecked}
-                            onChange={(e) => {
-                                handlecheckbox(e)
-                            }}/></td>
-                    <td className="td">{contact.name}</td>
-                    <td className="td">{contact.designation}</td>
-                    <td className="td">{contact.company}</td>
-                    <td className="td">{contact.industry}</td>
-                    {/* //tooltip */}
-                    <td className="tdemail">
-                        <div className="tooltip">
-                            {contact.email}
-                            <span className="tooltiptext"> {contact.email}</span>
-                        </div>
-                    </td>
-                    <td className="td">{contact.phoneNumber}</td>
-                    <td className="td">{contact.country}</td>
-                    {/* action buttons */}
-                    <td className="td" style={{ display: "flex", flexDirection: "row" }}>
-                        <button id={contact._id} onClick={(e) => allDElete(e)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
-                        <button><img src={edited} alt="editImg" className="actionimage"/></button>
-                    </td>
-                </tr>
-            )
-        }) : "" } </>)
+            {(contacts) ? contacts.map((contact, index) => {
+                let len = contacts.length
+                let val = index
+                return (
+                    //individual  checkbox 
+                    <tr key={index}>
+                        <td className="tdinp">
+                            <input type="checkbox" value={contact._id} checked={contact.ischecked}
+                                onChange={(e) => {
+                                    handlecheckbox(e)
+                                }} /></td>
+                        <td className="td">{contact.name}</td>
+                        <td className="td">{contact.designation}</td>
+                        <td className="td">{contact.company}</td>
+                        <td className="td">{contact.industry}</td>
+                        {/* //tooltip */}
+                        <td className="tdemail">
+                            <div className="tooltip">
+                                {contact.email}
+                                <span className="tooltiptext"> {contact.email}</span>
+                            </div>
+                        </td>
+                        <td className="td">{contact.phoneNumber}</td>
+                        <td className="td">{contact.country}</td>
+                        {/* action buttons */}
+                        <td className="td" style={{ display: "flex", flexDirection: "row" }}>
+                            <button id={contact._id} onClick={(e) => allDElete(e)}><img className="actionimage" src={deleted} alt="deleteImg" /></button>
+                            <button><img src={edited} alt="editImg" className="actionimage" /></button>
+                        </td>
+                    </tr>
+                )
+            }) : ""} </>)
     }
     // onClick={() => setDeleteTrigger(true)}
 
@@ -150,11 +150,11 @@ const Contacts = () => {
     return (
         <div className="main">
             <div className="nav">
-            <NavBar  setcontacts={setcontacts}/>
+                <NavBar setcontacts={setcontacts} />
             </div>
             <div className="contacts">
                 <div className="btn-container">
-                    <Buttons isChecked={ischecked} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} setcontacts={setcontacts}/>
+                    <Buttons isChecked={ischecked} deleteTrigger={deleteTrigger} setDeleteTrigger={setDeleteTrigger} setcontacts={setcontacts} />
                 </div>
                 <table>
                     <thead>
@@ -163,12 +163,8 @@ const Contacts = () => {
                             currentItem={currentItem} />
                     </thead>
                     <tbody>
-                        {
-                            renderconts(currentItem)
-                        }
+                        {renderconts(currentItem)}
                     </tbody>
-
-
                 </table>
 
             </div>
@@ -183,7 +179,7 @@ const Contacts = () => {
                     {renderpagenumbers}
                     {pageIncrementbtn}
                     <li>
-                        <button onClick={handlenext} disabled={currentpage == pages[pages.length-1] ? true : false}>next</button>
+                        <button onClick={handlenext} disabled={currentpage == pages[pages.length - 1] ? true : false}>next</button>
 
                     </li>
 

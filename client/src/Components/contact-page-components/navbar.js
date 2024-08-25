@@ -22,7 +22,7 @@ const NavBar = ({ setcontacts }) => {
                         { 'Authorization': localStorage.getItem('token') }
                 })
                 .then(res => {
-                    console.log(res.data.contactlistSearchkey);
+                    // console.log(res.data.contactlistSearchkey);
                     if (res.data.contactlistSearchkey) {
                         setcontacts([res.data.contactlistSearchkey])
                     }
