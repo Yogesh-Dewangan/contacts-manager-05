@@ -1,10 +1,10 @@
 import React from "react";
 
 const Pagination = ({ data,pageHandler }) => {
-    console.log(Math.ceil(data.length / 10))
+    // console.log(Math.ceil(data.length / 10))
     let pageNumbers = []
-    for (let i = 0; i <Math.ceil(data.length / 10); i++) {
-        pageNumbers.push(i+1)
+    for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+        pageNumbers.push(i)
         
     }
     return (

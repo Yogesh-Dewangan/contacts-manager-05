@@ -9,7 +9,7 @@ export function DeleteConfirmationPopup({setDeleteTrigger, setDeleteCompleteTrig
     const okDeleteHandler = async () => {
         await deleteContacts(isChecked)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setDeleteTrigger(false)
                 setDeleteCompleteTrigger(true);
                 // document.location.reload();

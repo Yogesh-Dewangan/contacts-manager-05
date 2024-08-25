@@ -5,13 +5,13 @@ import axios from "axios"
 import { SessionUtils } from "./SessionUtils";
 
 const SignUp = () => {
-    const navigate = useNavigate();
     const [login, setLogin] = useState({
         email: "",
         password: "",
         confirm_password: "",
     });
     const {ifSessionExist} = SessionUtils();
+    const navigate = useNavigate();
 
     useEffect(() => {
         ifSessionExist('/contact')
@@ -23,16 +23,40 @@ const SignUp = () => {
 
     const URL = "http://localhost:5000/v1"
     const signUpUrl = `${URL}/signup`;
-    const signUpUser = (userData) => {
+    const signUpUser = async () => {
 
-            axios.post(signUpUrl, userData)
+            // axios.post(signUpUrl, userData)
+            await fetch(signUpUrl, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login)
+            })
+                .then(res => res.json())
                 .then((res) => {
-                    alert(res.data.message);
-                    navigate("/")
+                    // alert(res.data.message);
+                    // navigate("/")
+                    if(res.status === "Success") {
+                        alert(res.message);
+                        navigate('/');
+                    } else {
+                        if(res.status === 'Failed') {
+                            alert(res.message);
+                        } else {
+                            if (res.errors[0].param === 'username') {
+                                alert('Username has to be email id of user')
+                            } else if (res.errors[0].param === 'password') {
+                                alert('password length must be atleast 6 and atmost 16')
+                            } else {
+                                alert(res.error);
+                            }
+                        }
+                    }
                 })
                 .catch((err) => {
-                    // console.log('err', err);
-                    alert(err.message);
+                    console.log('err', err);
+                    // alert(err);
                 })
     }
     //   const {signUpUser}= context(); //useAPI();
